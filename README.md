@@ -1,4 +1,4 @@
-# ContextAwareTodoList
+# ContextAwareTodoList [![Build Status](https://travis-ci.org/pchmielowski/ContextAwareTodoList.svg?branch=master)](https://travis-ci.org/pchmielowski/ContextAwareTodoList)
 
 Aplikacja powstająca w ramach konkursu [Daj się poznać](Aplikacja powstająca w ramach konkursu Daj się poznać)
 
