@@ -11,11 +11,8 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Task t1 = new Task("programming");
-        Task t2 = new Task("shopping");
-
-        t1.showOn(this);
-        t2.showOn(this);
+        TaskList firstTaskList = new TaskList();
+        firstTaskList.showOn(this);
     }
 
     @Override
