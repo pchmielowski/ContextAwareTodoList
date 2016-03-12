@@ -16,12 +16,12 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     }
 
     @Override
-    public void addCheckbox(boolean isChecked, String description) {
+    public void addTask(boolean isDone, String description) {
         CheckBox task = new CheckBox(this);
-        task.setChecked(isChecked);
+        task.setChecked(isDone);
         task.setText(description);
 
-        LinearLayout taskList = (LinearLayout) findViewById(R.id.taskList);
+        LinearLayout taskList = (LinearLayout) findViewById(R.id.taskListLayout);
         taskList.addView(task);
     }
 }

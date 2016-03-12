@@ -10,6 +10,6 @@ final public class Task {
     }
 
     public void showOn(TaskListView view) {
-        view.addCheckbox(isDone, name);
+        view.addTask(isDone, name);
     }
 }
