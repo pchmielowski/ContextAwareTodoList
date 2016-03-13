@@ -20,15 +20,15 @@ final public class TaskList {
 
     private Iterable<Task> tasks() {
         Cursor taskNames = dataBase.getTaskNames();
-        final ArrayList<Task> list = new ArrayList<Task>();
+        final ArrayList<Task> taskList = new ArrayList<Task>();
         while (taskNames.moveToNext()) {
             final int COLUMN_NUMBER = 0;
-            list.add(new Task(false, taskNames.getString(COLUMN_NUMBER)));
+            taskList.add(new Task(false, taskNames.getString(COLUMN_NUMBER)));
         }
         return new Iterable<Task>() {
             @Override
             public Iterator<Task> iterator() {
-                return list.iterator();
+                return taskList.iterator();
             }
         };
     }
