@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         setContentView(R.layout.activity_main);
 
         TaskList firstTaskList = new TaskList();
+        firstTaskList.context = this;
         firstTaskList.showOn(this);
     }
 

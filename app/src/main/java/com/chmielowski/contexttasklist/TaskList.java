@@ -1,11 +1,18 @@
 package com.chmielowski.contexttasklist;
 
-final public class TaskList {
-    public void showOn(TaskListView view) {
-        Task programming = new Task(false, "programming");
-        programming.showOn(view);
+import android.content.Context;
+import android.database.Cursor;
 
-        Task shopping = new Task(true, "shopping");
-        shopping.showOn(view);
+final public class TaskList {
+    public Context context; // TODO: remove
+
+    public void showOn(TaskListView view) {
+
+        TodoDbAdapter baseAdapter = new TodoDbAdapter(context);
+        Cursor cursor = baseAdapter.getAllTasks();
+        while (cursor.moveToNext()) {
+            Task task = new Task(false, cursor.getString(1));
+            task.showOn(view);
+        }
     }
 }
