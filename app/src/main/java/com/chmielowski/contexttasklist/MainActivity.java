@@ -10,14 +10,11 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        TaskList firstTaskList = new TaskList();
-        firstTaskList.context = this;
-        firstTaskList.showOn(this);
+        new TaskList(new DataBase(this)).showOn(this);
     }
 
     @Override
-    public void addTask(boolean isDone, String description) {
+    public void showTask(boolean isDone, String description) {
         CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);

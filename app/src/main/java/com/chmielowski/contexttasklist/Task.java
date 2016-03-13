@@ -10,6 +10,6 @@ final public class Task {
     }
 
     public void showOn(TaskListView view) {
-        view.addTask(isDone, name);
+        view.showTask(isDone, name);
     }
 }

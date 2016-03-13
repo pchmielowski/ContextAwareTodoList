@@ -5,14 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 final public class DataBase extends SQLiteOpenHelper {
 
-    private static final String COLUMN_TASK_NAME = "Name";
-    private static final String DATABASE_NAME = "Tasks";
-    private static final String COLUMN_ID_NAME = "Id";
+    private static final String DATABASE = "Tasks";
+    private static final String COLUMN_ID = "Id";
+    private static final String COLUMN_TASK = "Name";
 
     public DataBase(Context context) {
         super(context, "tasks.db", null, 1);
@@ -20,9 +17,9 @@ final public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DATABASE_NAME + " (" +
-                COLUMN_ID_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TASK_NAME + "  TEXT" +
+        db.execSQL("CREATE TABLE " + DATABASE + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_TASK + "  TEXT" +
                 ");");
     }
 
@@ -31,21 +28,9 @@ final public class DataBase extends SQLiteOpenHelper {
         throw new UnsupportedOperationException();
     }
 
-    public Iterable<Task> tasks() {
-        String[] columns = {COLUMN_TASK_NAME};
-        Cursor cursor = getReadableDatabase().query(DATABASE_NAME, columns,
+    public Cursor getTaskNames() {
+        return getReadableDatabase().query(DATABASE,
+                new String[]{COLUMN_TASK},
                 null, null, null, null, null);
-
-        final ArrayList<Task> list = new ArrayList<Task>();
-        while (cursor.moveToNext()) {
-            list.add(new Task(false, cursor.getString(0)));
-        }
-
-        return new Iterable<Task>() {
-            @Override
-            public Iterator<Task> iterator() {
-                return list.iterator();
-            }
-        };
     }
 }
