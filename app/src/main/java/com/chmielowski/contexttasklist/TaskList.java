@@ -1,14 +1,15 @@
 package com.chmielowski.contexttasklist;
 
-final public class TaskList {
-    final private DataBase dataBase;
+public final class TaskList implements ITaskList {
+    private final Persistence dataBase;
 
-    public TaskList(DataBase dataBase) {
-        this.dataBase = dataBase;
+    public TaskList(final Persistence dB) {
+        this.dataBase = dB;
     }
 
-    public void showOn(TaskListView view) {
-        for (Task task : dataBase.getTasks()) {
+    @Override
+    public void showOn(final TaskListView view) {
+        for (ITask task : dataBase.getTasks()) {
             task.showOn(view);
         }
     }

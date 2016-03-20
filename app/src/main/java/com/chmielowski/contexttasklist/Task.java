@@ -1,15 +1,16 @@
 package com.chmielowski.contexttasklist;
 
-final public class Task {
+public final class Task implements ITask {
     private final boolean isDone;
     private final String name;
 
-    public Task(boolean isDone, String name) {
-        this.isDone = isDone;
-        this.name = name;
+    public Task(final boolean isD, final String nm) {
+        this.isDone = isD;
+        this.name = nm;
     }
 
-    public void showOn(TaskListView view) {
+    @Override
+    public void showOn(final TaskListView view) {
         view.showTask(isDone, name);
     }
 }

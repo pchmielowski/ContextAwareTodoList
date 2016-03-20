@@ -7,19 +7,19 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity implements TaskListView {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new TaskList(new DataBase(this)).showOn(this);
     }
 
     @Override
-    public void showTask(boolean isDone, String description) {
+    public final void showTask(final boolean isDone, final String description) {
         CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
-
-        LinearLayout taskList = (LinearLayout) findViewById(R.id.taskListLayout);
+        LinearLayout taskList =
+                (LinearLayout) findViewById(R.id.taskListLayout);
         taskList.addView(task);
     }
 }
