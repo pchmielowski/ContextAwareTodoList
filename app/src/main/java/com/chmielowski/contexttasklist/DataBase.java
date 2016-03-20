@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 final public class DataBase extends SQLiteOpenHelper {
 
     private static final String DATABASE = "Tasks";
@@ -17,10 +20,11 @@ final public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DATABASE + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TASK + "  TEXT" +
-                ");");
+        throw new UnsupportedOperationException();
+//        db.execSQL("CREATE TABLE " + DATABASE + " (" +
+//                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+//                COLUMN_TASK + "  TEXT" +
+//                ");");
     }
 
     @Override
@@ -28,9 +32,22 @@ final public class DataBase extends SQLiteOpenHelper {
         throw new UnsupportedOperationException();
     }
 
-    public Cursor getTaskNames() {
-        return getReadableDatabase().query(DATABASE,
+    public Iterable<Task> getTasks() {
+        Cursor query = getReadableDatabase().query(
+                DATABASE,
                 new String[]{COLUMN_TASK},
-                null, null, null, null, null);
+                null, null, null, null, null
+        );
+        final ArrayList<Task> tasks = new ArrayList<Task>();
+        while (query.moveToNext()) {
+            final int COLUMN_NUMBER = 0;
+            tasks.add(new Task(false, query.getString(COLUMN_NUMBER)));
+        }
+        return new Iterable<Task>() {
+            @Override
+            public Iterator<Task> iterator() {
+                return tasks.iterator();
+            }
+        };
     }
 }
