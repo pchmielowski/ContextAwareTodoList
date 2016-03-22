@@ -11,7 +11,6 @@ import java.util.Iterator;
 public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     private static final String DATABASE = "Tasks";
-    private static final String COLUMN_ID = "Id";
     private static final String COLUMN_TASK = "Name";
 
     public DataBase(final Context context) {
