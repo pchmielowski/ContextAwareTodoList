@@ -34,20 +34,20 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
-    public Iterable<ITask> getTasks() {
+    public Iterable<Task> getTasks() {
         Cursor query = getReadableDatabase().query(
                 DATABASE,
                 new String[]{COLUMN_TASK},
                 null, null, null, null, null
         );
-        final ArrayList<ITask> tasks = new ArrayList<>();
+        final ArrayList<Task> tasks = new ArrayList<>();
         while (query.moveToNext()) {
             final int taskNamesColumn = 0;
-            tasks.add(new Task(false, query.getString(taskNamesColumn)));
+            tasks.add(new SqlTask(false, query.getString(taskNamesColumn)));
         }
-        return new Iterable<ITask>() {
+        return new Iterable<Task>() {
             @Override
-            public Iterator<ITask> iterator() {
+            public Iterator<Task> iterator() {
                 return tasks.iterator();
             }
         };

@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 
-public class TaskTest {
+public class SqlTaskTest {
 
     @Mock
     TaskListView view;
@@ -17,7 +17,7 @@ public class TaskTest {
     @Test
     public void showOn_withView_callsShowTask() {
         // arrange
-        Task task = new Task(false, "task name");
+        SqlTask task = new SqlTask(false, "task name");
 
         // act
         task.showOn(view);
@@ -30,7 +30,7 @@ public class TaskTest {
     @Test(expected=NullPointerException.class)
     public void showOn_withNull_NpeThrown() {
         // arrange
-        Task task = new Task(false, "task name");
+        SqlTask task = new SqlTask(false, "task name");
 
         // act & assert
         task.showOn(null);

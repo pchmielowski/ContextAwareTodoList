@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TaskListTest {
+public class SqlTaskListTest {
 
     @Mock
     TaskListView view;
@@ -23,10 +23,10 @@ public class TaskListTest {
     @Test
     public void showOn_emptyDataBase_callsGetTasks() {
         // arrange
-        when(dataBase.getTasks()).thenReturn(new Iterable<ITask>() {
+        when(dataBase.getTasks()).thenReturn(new Iterable<Task>() {
             @Override
-            public Iterator<ITask> iterator() {
-                return new ArrayList<ITask>().iterator();
+            public Iterator<Task> iterator() {
+                return new ArrayList<Task>().iterator();
             }
         });
         TaskList taskList = new TaskList(dataBase);
@@ -39,15 +39,15 @@ public class TaskListTest {
     }
 
     @Mock
-    ITask task;
+    Task task;
 
     @Test
     public void showOn_dataBaseOneTask_callsShowOn() {
         // arrange
-        when(dataBase.getTasks()).thenReturn(new Iterable<ITask>() {
+        when(dataBase.getTasks()).thenReturn(new Iterable<Task>() {
             @Override
-            public Iterator<ITask> iterator() {
-                ArrayList<ITask> list = new ArrayList<>();
+            public Iterator<Task> iterator() {
+                ArrayList<Task> list = new ArrayList<>();
                 list.add(task);
                 return list.iterator();
             }

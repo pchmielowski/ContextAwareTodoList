@@ -9,7 +9,7 @@ public final class TaskList implements ITaskList {
 
     @Override
     public void showOn(final TaskListView view) {
-        for (ITask task : dataBase.getTasks()) {
+        for (Task task : dataBase.getTasks()) {
             task.showOn(view);
         }
     }
