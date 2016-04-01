@@ -21,7 +21,7 @@ public class SqlTaskListTest {
 //                return new ArrayList<Task>().iterator();
 //            }
 //        });
-//        TaskList taskList = new TaskList(dataBase);
+//        SqlTaskList taskList = new SqlTaskList(dataBase);
 //
 //        // act
 //        taskList.showOn(view);
@@ -44,7 +44,7 @@ public class SqlTaskListTest {
 //                return list.iterator();
 //            }
 //        });
-//        TaskList taskList = new TaskList(dataBase);
+//        SqlTaskList taskList = new SqlTaskList(dataBase);
 //
 //        // act
 //        taskList.showOn(view);

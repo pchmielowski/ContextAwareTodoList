@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         try {
-            new TaskList(new DataBase(this)).showOn(this);
+            new SqlTaskList(new DataBase(this)).showOn(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

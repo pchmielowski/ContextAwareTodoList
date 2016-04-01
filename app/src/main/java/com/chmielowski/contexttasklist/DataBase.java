@@ -5,9 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     private static final String DATABASE = "Tasks";
@@ -43,25 +40,4 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
         );
 
     }
-
-    @Override
-    public Iterable<Integer> getTaskIdxs() {
-        Cursor query = getReadableDatabase().query(
-                DATABASE,
-                new String[]{"id"},
-                null, null, null, null, null
-        );
-        final ArrayList<Integer> tasks = new ArrayList<>();
-        while (query.moveToNext()) {
-            final int taskNamesColumn = 0;
-            tasks.add(query.getInt(taskNamesColumn));
-        }
-        return new Iterable<Integer>() {
-            @Override
-            public Iterator<Integer> iterator() {
-                return tasks.iterator();
-            }
-        };
-    }
-
 }
