@@ -4,31 +4,27 @@ import android.database.Cursor;
 
 public final class SqlTask implements Task {
 
-    private final Persistence dataSource;
+    private final Persistence dataBase;
     private final int id;
 
-    public SqlTask(final int i, final Persistence dataSrc) {
+    public SqlTask(final int i, final Persistence sql) {
         this.id = i;
-        this.dataSource = dataSrc;
+        this.dataBase = sql;
     }
 
     @Override
     public void showOn(final TaskListView view) throws Exception {
-        Boolean isDone = true;
-        String name = taskName(this.id);
-
-
-        view.showTask(isDone, name);
+        view.showTask(true, this.name());
     }
 
-    private String taskName(int id) throws Exception {
-        Cursor query = dataSource.query(
+    private String name() throws Exception {
+        Cursor answer = dataBase.query(
                 "Name",
                 "id = " + id
         );
-        if (query.moveToNext()) {
-            final int taskNamesColumn = 0;
-            return query.getString(taskNamesColumn);
+        if (answer.moveToNext()) {
+            final int nameColumnIdx = 0;
+            return answer.getString(nameColumnIdx);
         }
         throw new Exception("No task with id: " + Integer.toString(id));
     }

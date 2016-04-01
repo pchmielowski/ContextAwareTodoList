@@ -31,7 +31,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
-    public Cursor query(String columnName, String where) {
+    public Cursor query(final String columnName, final String where) {
         return getReadableDatabase().query(
                 DATABASE,
                 new String[]{columnName},
