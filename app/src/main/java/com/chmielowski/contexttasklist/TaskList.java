@@ -8,9 +8,9 @@ public final class TaskList implements ITaskList {
     }
 
     @Override
-    public void showOn(final TaskListView view) {
-        for (Task task : dataBase.getTasks()) {
-            task.showOn(view);
+    public void showOn(final TaskListView view) throws Exception {
+        for (Integer id : dataBase.getTaskIdxs()) {
+            new SqlTask(id,dataBase).showOn(view);
         }
     }
 }

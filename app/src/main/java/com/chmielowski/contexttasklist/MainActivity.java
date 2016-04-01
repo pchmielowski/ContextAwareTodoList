@@ -10,7 +10,11 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new TaskList(new DataBase(this)).showOn(this);
+        try {
+            new TaskList(new DataBase(this)).showOn(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
