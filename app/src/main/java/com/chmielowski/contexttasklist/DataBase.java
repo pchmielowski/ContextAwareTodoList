@@ -34,6 +34,17 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
+    public Cursor query(String columnName, String where) {
+        return getReadableDatabase().query(
+                DATABASE,
+                new String[]{columnName},
+                where,
+                null, null, null, null
+        );
+
+    }
+
+    @Override
     public Iterable<Integer> getTaskIdxs() {
         Cursor query = getReadableDatabase().query(
                 DATABASE,
@@ -53,38 +64,4 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
         };
     }
 
-    @Override
-    public String taskName(int id) throws Exception {
-        Cursor query = getReadableDatabase().query(
-                DATABASE,
-                new String[]{COLUMN_TASK},
-                "id = " + id,
-                null, null, null, null
-        );
-        if (query.moveToNext()) {
-            final int taskNamesColumn = 0;
-            return query.getString(taskNamesColumn);
-        }
-        throw new Exception("No task with id: " + Integer.toString(id));
-    }
-
-    @Override
-    public Iterable<Task> getTasks() {
-        Cursor query = getReadableDatabase().query(
-                DATABASE,
-                new String[]{COLUMN_TASK},
-                null, null, null, null, null
-        );
-        final ArrayList<Task> tasks = new ArrayList<>();
-        while (query.moveToNext()) {
-            final int taskNamesColumn = 0;
-            tasks.add(new SqlTask(false, query.getString(taskNamesColumn)));
-        }
-        return new Iterable<Task>() {
-            @Override
-            public Iterator<Task> iterator() {
-                return tasks.iterator();
-            }
-        };
-    }
 }

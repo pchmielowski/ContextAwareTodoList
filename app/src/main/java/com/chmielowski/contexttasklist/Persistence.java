@@ -1,9 +1,9 @@
 package com.chmielowski.contexttasklist;
 
+import android.database.Cursor;
+
 public interface Persistence {
+    Cursor query(String columnName, String where);
+
     Iterable<Integer> getTaskIdxs();
-
-    String taskName(int id) throws Exception;
-
-    Iterable<Task> getTasks();
 }
