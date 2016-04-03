@@ -21,7 +21,7 @@ public final class SqlTask implements Task {
     }
 
     @Override
-    public void toggleStatus(boolean done) {
+    public void toggleStatus(final boolean done) {
         dataBase.setBool(done, this.condition);
     }
 

@@ -19,18 +19,17 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     }
 
     @Override
-    public final void showTask(final boolean isDone, final String description,
+    public final void showTask(final boolean isDone,
+                               final String description,
                                final Command command) {
         final CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
-
         task.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 command.execute(task.isChecked());
             }
         });
-
         LinearLayout taskList =
                 (LinearLayout) findViewById(R.id.taskListLayout);
         taskList.addView(task);
