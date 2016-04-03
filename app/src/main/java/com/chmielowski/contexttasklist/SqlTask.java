@@ -1,7 +1,5 @@
 package com.chmielowski.contexttasklist;
 
-import android.view.View;
-
 public final class SqlTask implements Task {
 
     private static final String COLUMN_NAME = "name";
@@ -19,25 +17,12 @@ public final class SqlTask implements Task {
         view.showTask(
                 isDone,
                 this.name(),
-                new View.OnClickListener() {
-                    public void onClick(final View v) {
-                        if (isDone) {
-                            unsetDone();
-                        } else {
-                            setDone();
-                        }
-                    }
-                });
+                new ToggleStatusCommand(this));
     }
 
     @Override
-    public void setDone() {
-        dataBase.setBool(true, this.condition);
-    }
-
-    @Override
-    public void unsetDone() {
-        dataBase.setBool(false, this.condition);
+    public void toggleStatus(boolean done) {
+        dataBase.setBool(done, this.condition);
     }
 
     private Boolean isDone() throws Exception {

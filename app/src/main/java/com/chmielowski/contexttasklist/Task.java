@@ -3,7 +3,5 @@ package com.chmielowski.contexttasklist;
 public interface Task {
     void showOn(TaskListView view) throws Exception;
 
-    void setDone();
-
-    void unsetDone();
+    void toggleStatus(boolean done);
 }
