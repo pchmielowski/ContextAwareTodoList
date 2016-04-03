@@ -5,10 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.List;
+import java.util.Vector;
+
 public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
-    private static final String DATABASE = "Tasks";
-    private static final String COLUMN_TASK = "Name";
+    private static final String DATABASE_NAME = "Tasks";
+    private static final int FIRST_COLUMN = 0;
 
     public DataBase(final Context context) {
         super(context, "tasks.db", null, 1);
@@ -17,7 +20,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         throw new UnsupportedOperationException();
-//        db.execSQL("CREATE TABLE " + DATABASE + " (" +
+//        db.execSQL("CREATE TABLE " + DATABASE_NAME + " (" +
 //                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 //                COLUMN_TASK + "  TEXT" +
 //                ");");
@@ -30,25 +33,33 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public Cursor query(final String columnName, final String where) {
+    private Cursor answerForQuery(final String columnName, final String where) {
         return getReadableDatabase().query(
-                DATABASE,
+                DATABASE_NAME,
                 new String[]{columnName},
                 where,
                 null, null, null, null
         );
-
     }
 
     @Override
-    public String queryForString(final String columnName, final String where)
+    public String string(final String columnName, final String where)
             throws Exception {
-        Cursor answer = query(columnName, where);
+        Cursor answer = answerForQuery(columnName, where);
         if (answer.moveToNext()) {
-            final int nameColumnIdx = 0;
-            return answer.getString(nameColumnIdx);
+            return answer.getString(FIRST_COLUMN);
         }
         throw new Exception("No string.");
+    }
+
+    @Override
+    public List<Integer> integers(final String columnName, final String where)
+            throws Exception {
+        Cursor answer = answerForQuery(columnName, where);
+        List<Integer> vector = new Vector<>();
+        while (answer.moveToNext()) {
+            vector.add(answer.getInt(FIRST_COLUMN));
+        }
+        return vector;
     }
 }

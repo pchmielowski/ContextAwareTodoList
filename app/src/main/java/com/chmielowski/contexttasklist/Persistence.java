@@ -1,9 +1,10 @@
 package com.chmielowski.contexttasklist;
 
-import android.database.Cursor;
+import java.util.List;
 
 public interface Persistence {
-    Cursor query(String columnName, String where);
+    String string(String columnName, String where) throws Exception;
 
-    String queryForString(String columnName, String where) throws Exception;
+    List<Integer> integers(String columnName, String where)
+            throws Exception;
 }

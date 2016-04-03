@@ -16,7 +16,7 @@ public final class SqlTask implements Task {
     }
 
     private String name() throws Exception {
-        return dataBase.queryForString(
+        return dataBase.string(
                 "Name",
                 "id = " + id
         );
