@@ -40,4 +40,15 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
         );
 
     }
+
+    @Override
+    public String queryForString(final String columnName, final String where)
+            throws Exception {
+        Cursor answer = query(columnName, where);
+        if (answer.moveToNext()) {
+            final int nameColumnIdx = 0;
+            return answer.getString(nameColumnIdx);
+        }
+        throw new Exception("No string.");
+    }
 }

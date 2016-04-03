@@ -1,7 +1,5 @@
 package com.chmielowski.contexttasklist;
 
-import android.database.Cursor;
-
 public final class SqlTask implements Task {
 
     private final Persistence dataBase;
@@ -18,14 +16,9 @@ public final class SqlTask implements Task {
     }
 
     private String name() throws Exception {
-        Cursor answer = dataBase.query(
+        return dataBase.queryForString(
                 "Name",
                 "id = " + id
         );
-        if (answer.moveToNext()) {
-            final int nameColumnIdx = 0;
-            return answer.getString(nameColumnIdx);
-        }
-        throw new Exception("No task with id: " + Integer.toString(id));
     }
 }
