@@ -2,23 +2,29 @@ package com.chmielowski.contexttasklist;
 
 public final class SqlTask implements Task {
 
+    private static final String COLUMN_NAME = "name";
+    private final String CONDITION;
     private final Persistence dataBase;
-    private final int id;
 
     public SqlTask(final int i, final Persistence sql) {
-        this.id = i;
+        this.CONDITION = "id = " + i;
         this.dataBase = sql;
     }
 
     @Override
     public void showOn(final TaskListView view) throws Exception {
-        view.showTask(true, this.name());
+        view.showTask(isDone(), this.name());
+    }
+
+    private Boolean isDone() throws Exception {
+        return dataBase.bool(
+                this.COLUMN_NAME,
+                this.CONDITION);
     }
 
     private String name() throws Exception {
         return dataBase.string(
-                "name",
-                "id = " + id
-        );
+                this.COLUMN_NAME,
+                this.CONDITION);
     }
 }

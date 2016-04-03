@@ -7,4 +7,6 @@ public interface Persistence {
 
     List<Integer> integers(String columnName, String where)
             throws Exception;
+
+    Boolean bool(String columnName, String where) throws Exception;
 }
