@@ -9,4 +9,6 @@ public interface Persistence {
             throws Exception;
 
     Boolean bool(String columnName, String where) throws Exception;
+
+    void setBool(boolean b, String condition);
 }

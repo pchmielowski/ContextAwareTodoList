@@ -1,5 +1,6 @@
 package com.chmielowski.contexttasklist;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -60,11 +61,19 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
-    public Boolean bool(final String columnName, final String where) throws Exception {
+    public Boolean bool(final String columnName,
+                        final String where) throws Exception {
         Cursor answer = answerForQuery(columnName, where + " AND done=1");
         if (answer.moveToNext()) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void setBool(final boolean b, final String condition) {
+        ContentValues value = new ContentValues();
+        value.put("done", b);
+        getWritableDatabase().update(DATABASE_NAME, value, condition, null);
     }
 }
