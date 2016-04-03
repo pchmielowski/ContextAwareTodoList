@@ -2,5 +2,5 @@ package com.chmielowski.contexttasklist;
 
 public interface TaskListView {
     void showTask(boolean isDone, String description,
-                  Command command);
+                  ToggleStatusCommand command);
 }

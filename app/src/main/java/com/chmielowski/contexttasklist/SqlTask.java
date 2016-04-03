@@ -17,7 +17,7 @@ public final class SqlTask implements Task {
         view.showTask(
                 isDone,
                 this.name(),
-                new ToggleStatusCommand(this));
+                new ToggleTaskStatusCommand(this));
     }
 
     @Override

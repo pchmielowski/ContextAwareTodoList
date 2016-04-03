@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
-                               final Command command) {
+                               final ToggleStatusCommand command) {
         final CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
