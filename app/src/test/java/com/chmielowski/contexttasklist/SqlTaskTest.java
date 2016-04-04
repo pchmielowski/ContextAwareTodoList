@@ -28,6 +28,6 @@ public class SqlTaskTest {
         task.showOn(view);
 
         // assert
-        verify(view).showTask(true, "testing");
+        verify(view).showTask(true, "testing", new ChangeTaskStatusCommand(task));
     }
 }

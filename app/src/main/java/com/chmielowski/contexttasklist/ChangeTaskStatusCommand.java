@@ -1,14 +1,14 @@
 package com.chmielowski.contexttasklist;
 
-public final class ToggleTaskStatusCommand implements ToggleStatusCommand {
+public final class ChangeTaskStatusCommand implements ChangeStatusCommand {
     private final Task task;
 
-    public ToggleTaskStatusCommand(final Task tsk) {
+    public ChangeTaskStatusCommand(final Task tsk) {
         this.task = tsk;
     }
 
     @Override
     public void execute(final boolean done) {
-        task.toggleStatus(done);
+        task.status(done);
     }
 }

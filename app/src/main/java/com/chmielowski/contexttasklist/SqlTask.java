@@ -13,15 +13,15 @@ public final class SqlTask implements Task {
 
     @Override
     public void showOn(final TaskListView view) throws Exception {
-        final boolean isDone = this.isDone();
         view.showTask(
-                isDone,
+                this.isDone(),
                 this.name(),
-                new ToggleTaskStatusCommand(this));
+                new ChangeTaskStatusCommand(this)
+        );
     }
 
     @Override
-    public void toggleStatus(final boolean done) {
+    public void status(final boolean done) {
         dataBase.setBool(done, this.condition);
     }
 

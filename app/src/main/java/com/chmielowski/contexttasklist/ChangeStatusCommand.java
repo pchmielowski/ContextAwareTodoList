@@ -1,5 +1,5 @@
 package com.chmielowski.contexttasklist;
 
-public interface ToggleStatusCommand {
+public interface ChangeStatusCommand {
     void execute(boolean done);
 }
