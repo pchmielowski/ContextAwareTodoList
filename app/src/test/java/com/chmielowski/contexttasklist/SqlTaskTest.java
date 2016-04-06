@@ -21,7 +21,8 @@ public class SqlTaskTest {
     @Test
     public void showsValidTaskName() throws Exception {
         // arrange
-        when(dataBase.string("Name", "id = 123")).thenReturn("testing");
+        when(dataBase.string("name", "id = 123")).thenReturn("testing");
+        when(dataBase.bool("done", "id = 123")).thenReturn(true);
         SqlTask task = new SqlTask(123, dataBase);
 
         // act
