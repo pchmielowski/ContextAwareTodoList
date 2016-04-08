@@ -44,4 +44,16 @@ public class SqlTaskTest {
         // assert
         verify(dataBase).string("name", "id = 123");
     }
+
+    @Test
+    public void callsMethod_dataBase_bool() throws Exception {
+        // arrange
+        SqlTask task = new SqlTask(123, dataBase);
+
+        // act
+        task.showOn(view);
+
+        // assert
+        verify(dataBase).bool("done", "id = 123");
+    }
 }
