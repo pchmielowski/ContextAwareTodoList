@@ -1,5 +1,8 @@
 package com.chmielowski.contexttasklist;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(of = "task")
 public final class ChangeTaskStatusCommand implements ChangeStatusCommand {
     private final Task task;
 
