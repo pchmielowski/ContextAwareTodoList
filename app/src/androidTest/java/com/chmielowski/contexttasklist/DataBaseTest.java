@@ -1,14 +1,18 @@
 package com.chmielowski.contexttasklist;
 
+import android.support.test.runner.AndroidJUnit4;
+import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @SmallTest
-public class DataBaseTest {
+@RunWith(AndroidJUnit4.class)
+public class DataBaseTest extends AndroidTestCase {
 
     @Test
-    public void empty() throws Exception {
-
+    public void testAppTitle() {
+        assertEquals("Context Tasklist", getContext().getResources().getString(R.string.app_name));
     }
 }
