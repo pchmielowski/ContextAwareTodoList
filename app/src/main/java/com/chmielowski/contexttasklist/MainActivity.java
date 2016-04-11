@@ -70,6 +70,33 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                 command.execute(task.isChecked());
             }
         });
+        task.setLongClickable(true);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete task?");
+        final TaskListView view = (TaskListView) this;
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+
+
+        task.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                dialog.show();
+                return false;
+            }
+        });
         LinearLayout taskList =
                 (LinearLayout) findViewById(R.id.taskListLayout);
         taskList.addView(task);
