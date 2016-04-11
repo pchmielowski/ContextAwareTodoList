@@ -20,7 +20,7 @@ public final class SqlTaskList implements TaskList {
     }
 
     @Override
-    public void addTask(String nm) {
+    public void addTask(final String nm) {
         ContentValues cv = new ContentValues();
         cv.put("name", nm);
         cv.put("done", 0);

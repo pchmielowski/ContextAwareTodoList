@@ -64,18 +64,17 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     @Override
     public Boolean bool(final String columnName,
                         String where) throws Exception {
-        if (where.isEmpty()) where = "1";
-        Cursor answer = answerForQuery(columnName, where + " AND " + columnName + "=1");
+        if (where.isEmpty()) {
+            where = "1";
+        }
+        Cursor answer = answerForQuery(columnName,
+                where + " AND " + columnName + "=1");
         int numOccurences = answer.getCount();
         if (numOccurences > 1) {
             throw new IllegalArgumentException(
                     "More than one entries fulfil condition: " + where);
         }
-        if (numOccurences == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return numOccurences == 1;
     }
 
     @Override
@@ -86,7 +85,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
-    public void insert(ContentValues cv) {
+    public void insert(final ContentValues cv) {
         getWritableDatabase().insert(tableName, null, cv);
     }
 }

@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity implements TaskListView {
-    private String m_Text;
-
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         final TaskListView view = (TaskListView) this;
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 taskList.addTask(input.getText().toString());
                 try {
                     taskList.showOn(view);
@@ -43,12 +41,14 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                 }
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog,
+                                        final int which) {
+                        dialog.cancel();
+                    }
+                });
         final AlertDialog dialog = builder.create();
         Button addTaskButton = (Button) findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         final TaskListView view = (TaskListView) this;
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 dialog.cancel();
             }
         });
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
 
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 dialog.show();
                 return false;
             }
