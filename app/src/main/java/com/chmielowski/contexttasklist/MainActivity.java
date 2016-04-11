@@ -61,13 +61,14 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
-                               final ChangeStatusCommand command) {
+                               final ChangeStatusCommand statusCommand,
+                               final DeleteTaskCommand deleteCommand) {
         final CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
         task.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                command.execute(task.isChecked());
+                statusCommand.execute(task.isChecked());
             }
         });
         task.setLongClickable(true);
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
+                deleteCommand.execute();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -15,13 +15,19 @@ public final class SqlTask implements Task {
         view.showTask(
                 this.isDone(),
                 this.name(),
-                new ChangeTaskStatusCommand(this)
+                new ChangeTaskStatusCommand(this),
+                new DeleteTaskCommand(this)
         );
     }
 
     @Override
     public void status(final boolean done) {
         dataBase.setBool(done, this.condition);
+    }
+
+    @Override
+    public void delete() {
+        dataBase.delete(this.condition);
     }
 
     private Boolean isDone() throws Exception {

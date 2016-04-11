@@ -15,4 +15,6 @@ public interface Persistence {
     void setBool(boolean b, String condition);
 
     void insert(ContentValues cv);
+
+    void delete(String where);
 }
