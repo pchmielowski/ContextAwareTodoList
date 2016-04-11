@@ -1,7 +1,9 @@
 package com.chmielowski.contexttasklist;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -12,6 +14,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity implements TaskListView {
+    private int lastUsedId;
+
+    public MainActivity() {
+        lastUsedId = 1000000;
+    }
+
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         });
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
@@ -72,14 +81,18 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
             }
         });
         task.setLongClickable(true);
-
-
+//        final int id = View.generateViewId();
+        final int id = lastUsedId++;
+        task.setId(id);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete task?");
         final TaskListView view = (TaskListView) this;
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
+                LinearLayout taskList =
+                        (LinearLayout) findViewById(R.id.taskListLayout);
+                taskList.removeView(findViewById(id));
                 deleteCommand.execute();
             }
         });
