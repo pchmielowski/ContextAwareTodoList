@@ -31,10 +31,16 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
+        final TaskListView view = (TaskListView) this;
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 taskList.addTask(input.getText().toString());
+                try {
+                    taskList.showOn(view);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -67,5 +73,16 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         LinearLayout taskList =
                 (LinearLayout) findViewById(R.id.taskListLayout);
         taskList.addView(task);
+    }
+
+    @Override
+    public final void clean() {
+        LinearLayout taskList =
+                (LinearLayout) findViewById(R.id.taskListLayout);
+        for (int i = 1; i < taskList.getChildCount(); i++) { // i = 1 to omit button. TODO: move button to another layout
+            View child = taskList.getChildAt(i);
+            taskList.removeView(child);
+        }
+//        taskList.removeAllViews();
     }
 }

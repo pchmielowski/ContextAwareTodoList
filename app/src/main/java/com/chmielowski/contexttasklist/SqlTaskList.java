@@ -13,6 +13,7 @@ public final class SqlTaskList implements TaskList {
 
     @Override
     public void showOn(final TaskListView view) throws Exception {
+        view.clean();
         for (Integer index : indexes()) {
             new SqlTask(index, dataBase).showOn(view);
         }
