@@ -90,7 +90,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     }
 
     @Override
-    public void delete(String where) {
+    public void delete(final String where) {
         getWritableDatabase().delete(tableName, where, null);
     }
 }

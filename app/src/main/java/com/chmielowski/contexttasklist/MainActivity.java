@@ -1,9 +1,7 @@
 package com.chmielowski.contexttasklist;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -31,7 +29,16 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        final AlertDialog dialog = addTaskDialog(taskList);
+        Button addTaskButton = (Button) findViewById(R.id.add_task_button);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                dialog.show();
+            }
+        });
+    }
 
+    private AlertDialog addTaskDialog(final TaskList taskList) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add new task");
         final EditText input = new EditText(this);
@@ -57,16 +64,9 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                         dialog.cancel();
                     }
                 });
-        final AlertDialog dialog = builder.create();
-        Button addTaskButton = (Button) findViewById(R.id.add_task_button);
-        addTaskButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-                dialog.show();
-            }
-        });
+        return builder.create();
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
@@ -81,9 +81,23 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
             }
         });
         task.setLongClickable(true);
-//        final int id = View.generateViewId();
-        final int id = lastUsedId++;
+        final int id = lastUsedId++; // TODO: final int id = View.generateViewId();
         task.setId(id);
+        final AlertDialog dialog = removeTaskDialog(deleteCommand, id);
+        task.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                dialog.show();
+                return false;
+            }
+        });
+        LinearLayout taskList =
+                (LinearLayout) findViewById(R.id.taskListLayout);
+        taskList.addView(task);
+    }
+
+    private AlertDialog removeTaskDialog(final DeleteTaskCommand deleteCommand,
+                                         final int id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete task?");
         final TaskListView view = (TaskListView) this;
@@ -102,19 +116,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                 dialog.cancel();
             }
         });
-        final AlertDialog dialog = builder.create();
-
-
-        task.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View v) {
-                dialog.show();
-                return false;
-            }
-        });
-        LinearLayout taskList =
-                (LinearLayout) findViewById(R.id.taskListLayout);
-        taskList.addView(task);
+        return builder.create();
     }
 
     @Override

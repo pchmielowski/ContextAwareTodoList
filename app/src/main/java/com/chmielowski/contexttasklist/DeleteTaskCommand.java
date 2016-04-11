@@ -1,10 +1,10 @@
 package com.chmielowski.contexttasklist;
 
-public class DeleteTaskCommand implements Command {
+public final class DeleteTaskCommand implements Command {
 
     private final Task task;
 
-    public DeleteTaskCommand(Task tsk) {
+    public DeleteTaskCommand(final Task tsk) {
         this.task = tsk;
     }
 
