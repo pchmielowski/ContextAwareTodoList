@@ -1,5 +1,7 @@
 package com.chmielowski.contexttasklist;
 
+import android.content.ContentValues;
+
 import java.util.List;
 
 public final class SqlTaskList implements TaskList {
@@ -18,7 +20,10 @@ public final class SqlTaskList implements TaskList {
 
     @Override
     public void addTask(String nm) {
-        
+        ContentValues cv = new ContentValues();
+        cv.put("name", nm);
+        cv.put("done", 0);
+        dataBase.insert(cv);
     }
 
     private List<Integer> indexes() throws Exception {

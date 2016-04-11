@@ -1,5 +1,7 @@
 package com.chmielowski.contexttasklist;
 
+import android.content.ContentValues;
+
 import java.util.List;
 
 public interface Persistence {
@@ -11,4 +13,6 @@ public interface Persistence {
     Boolean bool(String columnName, String where) throws Exception;
 
     void setBool(boolean b, String condition);
+
+    void insert(ContentValues cv);
 }

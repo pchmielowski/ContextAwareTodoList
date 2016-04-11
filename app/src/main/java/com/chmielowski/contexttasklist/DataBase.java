@@ -84,4 +84,9 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
         value.put("done", b);
         getWritableDatabase().update(tableName, value, condition, null);
     }
+
+    @Override
+    public void insert(ContentValues cv) {
+        getWritableDatabase().insert(tableName, null, cv);
+    }
 }
