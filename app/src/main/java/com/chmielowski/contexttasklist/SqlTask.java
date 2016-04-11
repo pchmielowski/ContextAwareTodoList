@@ -2,7 +2,6 @@ package com.chmielowski.contexttasklist;
 
 public final class SqlTask implements Task {
 
-    private static final String COLUMN_NAME = "name";
     private final String condition;
     private final Persistence dataBase;
 
@@ -26,14 +25,16 @@ public final class SqlTask implements Task {
     }
 
     private Boolean isDone() throws Exception {
+        final String columnName = "done";
         return dataBase.bool(
-                this.COLUMN_NAME,
+                columnName,
                 this.condition);
     }
 
     private String name() throws Exception {
+        final String columnName = "name";
         return dataBase.string(
-                this.COLUMN_NAME,
+                columnName,
                 this.condition);
     }
 }
