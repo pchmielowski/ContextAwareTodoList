@@ -11,11 +11,12 @@ import java.util.Vector;
 
 public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
-    private static final String DATABASE_NAME = "Tasks";
+    private final String tableName;
     private static final int FIRST_COLUMN = 0;
 
-    public DataBase(final Context context) {
+    public DataBase(final Context context, final String tblName) {
         super(context, "tasks.db", null, 1);
+        this.tableName = tblName;
     }
 
     @Override
@@ -32,7 +33,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     private Cursor answerForQuery(final String columnName, final String where) {
         return getReadableDatabase().query(
-                DATABASE_NAME,
+                tableName,
                 new String[]{columnName},
                 where,
                 null, null, null, null
@@ -74,6 +75,6 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     public void setBool(final boolean b, final String condition) {
         ContentValues value = new ContentValues();
         value.put("done", b);
-        getWritableDatabase().update(DATABASE_NAME, value, condition, null);
+        getWritableDatabase().update(tableName, value, condition, null);
     }
 }
