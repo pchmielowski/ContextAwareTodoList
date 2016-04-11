@@ -1,8 +1,8 @@
-# ContextAwareTodoList [![Build Status](https://travis-ci.org/pchmielowski/ContextAwareTodoList.svg?branch=master)](https://travis-ci.org/pchmielowski/ContextAwareTodoList)
+# ContextAwareTodoList
 
-Aplikacja powstająca w ramach konkursu [Daj się poznać](Aplikacja powstająca w ramach konkursu Daj się poznać)
+Aplikacja powstająca w ramach konkursu [Daj się poznać](http://www.maciejaniserowicz.com/daj-sie-poznac/)
 
-Proces powstawania opisywać będę na blogu [chmielowski.net](chmielowski.net)
+Proces powstawania opisywać będę na blogu [chmielowski.net](http://www.chmielowski.net)
 
 Chcę stworzyć aplikację na Androida pozwalającą na tworzenie i zarządzanie listami zadań do zrobienia. 
 Zgodnie z regułami Getting Things Done, zadania do wykonania powinny być skategoryzowane według kontekstu: w domu, w pracy, na mieście itd. 
