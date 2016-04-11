@@ -64,7 +64,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
     @Override
     public Boolean bool(final String columnName,
                         final String where) throws Exception {
-        Cursor answer = answerForQuery(columnName, where + " AND done=1");
+        Cursor answer = answerForQuery(columnName, where + " AND " + columnName +"=1");
         if (answer.moveToNext()) {
             return true;
         }
