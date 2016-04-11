@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
@@ -41,6 +42,8 @@ public class DataBaseTest extends AndroidTestCase {
                 + " (strings, booleans) VALUES ('first', 0);");
         sql.getWritableDatabase().execSQL("INSERT INTO " + TABLE_NAME
                 + " (strings, booleans) VALUES ('second', 1);");
+        sql.getWritableDatabase().execSQL("INSERT INTO " + TABLE_NAME
+                + " (strings, booleans) VALUES ('third', 1);");
     }
 
     @MediumTest
@@ -49,7 +52,7 @@ public class DataBaseTest extends AndroidTestCase {
 
         List<Integer> result = dataBase.integers("id", "");
 
-        assertEquals(Arrays.asList(1, 2), result);
+        assertEquals(Arrays.asList(1, 2, 3), result);
     }
 
     @MediumTest
@@ -72,5 +75,18 @@ public class DataBaseTest extends AndroidTestCase {
 
         assertEquals(false, result1);
         assertEquals(true, result2);
+    }
+
+    @MediumTest
+    public void throws_exception_if_wrong_argument_for_bool() throws Exception {
+        DataBase dataBase = new DataBase(getContext(), TABLE_NAME);
+        try {
+            dataBase.bool("booleans", "");
+            Assert.fail("Should have thrown IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // success
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }
