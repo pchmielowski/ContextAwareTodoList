@@ -16,6 +16,11 @@ public final class SqlTaskList implements TaskList {
         }
     }
 
+    @Override
+    public void addTask(String nm) {
+        
+    }
+
     private List<Integer> indexes() throws Exception {
         return dataBase.integers("id", "");
     }
