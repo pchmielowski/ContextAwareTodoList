@@ -1,5 +1,8 @@
 package com.chmielowski.contexttasklist;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(of = "task")
 public final class DeleteTaskCommand implements Command {
 
     private final Task task;

@@ -30,7 +30,11 @@ public class SqlTaskTest {
         task.showOn(view);
 
         // assert
-        verify(view).showTask(true, "testing", new ChangeTaskStatusCommand(task));
+        verify(view).showTask(
+                true,
+                "testing",
+                new ChangeTaskStatusCommand(task),
+                new DeleteTaskCommand(task));
     }
 
     @Test
