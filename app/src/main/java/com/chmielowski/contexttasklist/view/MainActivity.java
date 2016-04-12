@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.chmielowski.contexttasklist.Persistence;
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        final AlertDialog dialog = addTaskDialog(taskList);
+        final AddTaskDialog dialog = new AddTaskDialog(this, this, taskList);
         Button addTaskButton = (Button) findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
@@ -47,34 +45,6 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         });
     }
 
-    private AlertDialog addTaskDialog(final TaskList taskList) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add new task");
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-        final TaskListView view = (TaskListView) this;
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                taskList.addTask(input.getText().toString());
-                try {
-                    taskList.showOn(view);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        builder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog,
-                                        final int which) {
-                        dialog.cancel();
-                    }
-                });
-        return builder.create();
-    }
 
     @Override
     public final void showTask(final boolean isDone,
