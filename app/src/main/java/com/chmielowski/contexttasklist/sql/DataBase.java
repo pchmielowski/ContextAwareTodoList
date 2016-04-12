@@ -23,7 +23,6 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + tableName + ";");
         getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
                 this.tableName +
                 " (" +
