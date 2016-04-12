@@ -1,6 +1,10 @@
-package com.chmielowski.contexttasklist;
+package com.chmielowski.contexttasklist.sql;
 
 import android.content.ContentValues;
+
+import com.chmielowski.contexttasklist.Persistence;
+import com.chmielowski.contexttasklist.TaskList;
+import com.chmielowski.contexttasklist.view.TaskListView;
 
 import java.util.List;
 

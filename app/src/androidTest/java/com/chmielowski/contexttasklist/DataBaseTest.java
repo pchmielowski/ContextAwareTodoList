@@ -6,6 +6,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import com.chmielowski.contexttasklist.sql.DataBase;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;

@@ -1,4 +1,10 @@
-package com.chmielowski.contexttasklist;
+package com.chmielowski.contexttasklist.sql;
+
+import com.chmielowski.contexttasklist.Persistence;
+import com.chmielowski.contexttasklist.Task;
+import com.chmielowski.contexttasklist.commands.ChangeTaskStatusCommand;
+import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
+import com.chmielowski.contexttasklist.view.TaskListView;
 
 public final class SqlTask implements Task {
 

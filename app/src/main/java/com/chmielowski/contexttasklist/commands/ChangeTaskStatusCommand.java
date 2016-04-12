@@ -1,4 +1,6 @@
-package com.chmielowski.contexttasklist;
+package com.chmielowski.contexttasklist.commands;
+
+import com.chmielowski.contexttasklist.Task;
 
 import lombok.EqualsAndHashCode;
 
