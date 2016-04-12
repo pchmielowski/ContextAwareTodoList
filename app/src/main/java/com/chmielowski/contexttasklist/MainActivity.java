@@ -1,7 +1,5 @@
 package com.chmielowski.contexttasklist;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +12,7 @@ import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.sql.DataBase;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.AddTaskDialog;
+import com.chmielowski.contexttasklist.view.RemoveTaskDialog;
 import com.chmielowski.contexttasklist.view.TaskListView;
 
 
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         task.setLongClickable(true);
         final int id = View.generateViewId();
         task.setId(id);
-        final AlertDialog dialog = removeTaskDialog(deleteCommand, id);
+        final RemoveTaskDialog dialog = new RemoveTaskDialog(this, this, deleteCommand, id);
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
@@ -68,27 +67,11 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         taskList.addView(task);
     }
 
-    private AlertDialog removeTaskDialog(final DeleteTaskCommand deleteCommand,
-                                         final int id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete task?");
-        final TaskListView view = (TaskListView) this;
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                LinearLayout taskList =
-                        (LinearLayout) findViewById(R.id.taskListLayout);
-                taskList.removeView(findViewById(id));
-                deleteCommand.execute();
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                dialog.cancel();
-            }
-        });
-        return builder.create();
+    @Override
+    public final void removeTask(int id) {
+        LinearLayout taskList =
+                (LinearLayout) findViewById(R.id.taskListLayout);
+        taskList.removeView(findViewById(id));
     }
 
     @Override

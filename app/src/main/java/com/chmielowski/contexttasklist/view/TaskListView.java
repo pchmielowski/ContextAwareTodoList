@@ -9,5 +9,7 @@ public interface TaskListView {
                   ChangeStatusCommand command,
                   DeleteTaskCommand dltCommand);
 
+    void removeTask(int id);
+
     void clean();
 }

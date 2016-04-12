@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.chmielowski.contexttasklist.TaskList;
 
-public final class AddTaskDialog {
+public final class AddTaskDialog implements QuestionDialog {
     private final Context context;
     private final TaskListView view;
     private final TaskList taskList;
@@ -22,6 +22,7 @@ public final class AddTaskDialog {
         this.taskList = tlist;
     }
 
+    @Override
     public void show() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Add new task");
