@@ -18,12 +18,6 @@ import com.chmielowski.contexttasklist.view.TaskListView;
 
 
 public class MainActivity extends AppCompatActivity implements TaskListView {
-    private int lastUsedId;
-
-    public MainActivity() {
-        lastUsedId = 1000000;
-    }
-
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
             }
         });
         task.setLongClickable(true);
-        final int id = lastUsedId++; // TODO: final int id = View.generateViewId();
+        final int id = View.generateViewId();
         task.setId(id);
         final AlertDialog dialog = removeTaskDialog(deleteCommand, id);
         task.setOnLongClickListener(new View.OnLongClickListener() {
