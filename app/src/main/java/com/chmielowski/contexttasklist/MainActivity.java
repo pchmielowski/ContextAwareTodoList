@@ -1,4 +1,4 @@
-package com.chmielowski.contexttasklist.view;
+package com.chmielowski.contexttasklist;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
-import com.chmielowski.contexttasklist.Persistence;
-import com.chmielowski.contexttasklist.R;
-import com.chmielowski.contexttasklist.TaskList;
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.sql.DataBase;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
+import com.chmielowski.contexttasklist.view.AddTaskDialog;
+import com.chmielowski.contexttasklist.view.TaskListView;
 
 
 public class MainActivity extends AppCompatActivity implements TaskListView {
