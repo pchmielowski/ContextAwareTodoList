@@ -9,7 +9,9 @@ import android.widget.EditText;
 
 import com.chmielowski.contexttasklist.TaskList;
 
-public final class AddTaskDialog extends TaskListDialog implements QuestionDialog {
+public final class AddTaskDialog
+        extends TaskListDialog
+        implements QuestionDialog {
     private final TaskList taskList;
 
     public AddTaskDialog(final Context ctx,

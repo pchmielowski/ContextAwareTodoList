@@ -1,6 +1,7 @@
 package com.chmielowski.contexttasklist;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -37,12 +38,30 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         });
     }
 
-
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
                                final ChangeStatusCommand statusCommand,
                                final DeleteTaskCommand deleteCommand) {
+        taskListLayout().addView(
+                checkBox(
+                        isDone,
+                        description,
+                        statusCommand,
+                        deleteCommand
+                )
+        );
+    }
+
+    private LinearLayout taskListLayout() {
+        return (LinearLayout) findViewById(R.id.taskListLayout);
+    }
+
+    @NonNull
+    private CheckBox checkBox(final boolean isDone,
+                              final String description,
+                              final ChangeStatusCommand statusCommand,
+                              final DeleteTaskCommand deleteCommand) {
         final CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
@@ -54,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
         task.setLongClickable(true);
         final int id = View.generateViewId();
         task.setId(id);
-        final RemoveTaskDialog dialog = new RemoveTaskDialog(this, this, deleteCommand, id);
+        final RemoveTaskDialog dialog = new RemoveTaskDialog(
+                this,
+                this,
+                deleteCommand,
+                id);
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
@@ -62,22 +85,16 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                 return false;
             }
         });
-        LinearLayout taskList =
-                (LinearLayout) findViewById(R.id.taskListLayout);
-        taskList.addView(task);
+        return task;
     }
 
     @Override
-    public final void removeTask(int id) {
-        LinearLayout taskList =
-                (LinearLayout) findViewById(R.id.taskListLayout);
-        taskList.removeView(findViewById(id));
+    public final void removeTask(final int id) {
+        taskListLayout().removeView(findViewById(id));
     }
 
     @Override
     public final void clean() {
-        LinearLayout taskList =
-                (LinearLayout) findViewById(R.id.taskListLayout);
-        taskList.removeAllViews();
+        taskListLayout().removeAllViews();
     }
 }

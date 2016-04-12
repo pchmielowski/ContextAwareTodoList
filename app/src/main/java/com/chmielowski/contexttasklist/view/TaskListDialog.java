@@ -6,7 +6,7 @@ public abstract class TaskListDialog implements QuestionDialog  {
     protected final TaskListView view;
     protected final Context context;
 
-    public TaskListDialog(Context ctx, TaskListView vw) {
+    public TaskListDialog(final Context ctx, final TaskListView vw) {
         this.context = ctx;
         this.view = vw;
     }
