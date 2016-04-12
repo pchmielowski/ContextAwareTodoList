@@ -6,10 +6,8 @@ import android.content.DialogInterface;
 
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 
-public class RemoveTaskDialog implements QuestionDialog {
+public final class RemoveTaskDialog extends TaskListDialog implements QuestionDialog {
 
-    private final Context context;
-    private final TaskListView view;
     private final DeleteTaskCommand deleteCommand;
     private final int checkBoxId;
 
@@ -17,8 +15,7 @@ public class RemoveTaskDialog implements QuestionDialog {
                             final TaskListView vw,
                             final DeleteTaskCommand deleteCmd,
                             final int chxkBxId) {
-        this.context = ctx;
-        this.view = vw;
+        super(ctx, vw);
         this.deleteCommand = deleteCmd;
         this.checkBoxId = chxkBxId;
     }
