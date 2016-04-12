@@ -23,7 +23,14 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        throw new UnsupportedOperationException();
+        getWritableDatabase().execSQL("DROP TABLE IF EXISTS " + tableName + ";");
+        getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
+                this.tableName +
+                " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT, " +
+                "done INTEGER" +
+                ");");
     }
 
     @Override
