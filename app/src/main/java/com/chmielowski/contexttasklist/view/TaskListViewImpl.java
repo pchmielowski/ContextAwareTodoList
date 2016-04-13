@@ -12,7 +12,7 @@ import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 public class TaskListViewImpl implements TaskListView {
     private final Activity mainActivity;
 
-    TaskListViewImpl(final Activity mainActvt) {
+    public TaskListViewImpl(final Activity mainActvt) {
 
         this.mainActivity = mainActvt;
     }
