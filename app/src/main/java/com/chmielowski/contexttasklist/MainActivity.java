@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                         isDone,
                         description,
                         statusCommand,
-                        deleteCommand
+                        deleteCommand,
+                        View.generateViewId()
                 )
         );
     }
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
     private CheckBox checkBox(final boolean isDone,
                               final String description,
                               final ChangeStatusCommand statusCommand,
-                              final DeleteTaskCommand deleteCommand) {
+                              final DeleteTaskCommand deleteCommand,
+                              int checkboxViewId) {
         final CheckBox task = new CheckBox(this);
         task.setChecked(isDone);
         task.setText(description);
@@ -71,13 +73,14 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
             }
         });
         task.setLongClickable(true);
-        final int id = View.generateViewId();
-        task.setId(id);
+        task.setId(checkboxViewId);
+
         final RemoveTaskDialog dialog = new RemoveTaskDialog(
                 this,
                 this,
                 deleteCommand,
-                id);
+                checkboxViewId);
+
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
