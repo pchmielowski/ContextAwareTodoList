@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                                final DeleteTaskCommand deleteCommand) {
         int checkboxViewId = View.generateViewId();
         taskListLayout().addView(
-                new TaskCheckBox().checkBox(
+                new TaskCheckBox(
                         isDone,
                         description,
                         statusCommand,
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                                 checkboxViewId),
                         checkboxViewId,
                         this
-                )
+                ).checkBox()
         );
     }
 
