@@ -1,5 +1,6 @@
 package com.chmielowski.contexttasklist;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,18 +44,20 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                                final ChangeStatusCommand statusCommand,
                                final DeleteTaskCommand deleteCommand) {
         int checkboxViewId = View.generateViewId();
+        Context mainActivityContext = (Context) this;
+        TaskListView taskListView = (TaskListView) this;
         taskListLayout().addView(
                 new TaskCheckBox(
                         isDone,
                         description,
                         statusCommand,
                         new RemoveTaskDialog(
-                                this,
-                                this,
+                                mainActivityContext,
+                                taskListView,
                                 deleteCommand,
                                 checkboxViewId),
                         checkboxViewId,
-                        this
+                        mainActivityContext
                 ).checkBox()
         );
     }
