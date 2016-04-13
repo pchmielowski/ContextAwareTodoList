@@ -1,11 +1,9 @@
 package com.chmielowski.contexttasklist;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
@@ -14,6 +12,7 @@ import com.chmielowski.contexttasklist.sql.DataBase;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.AddTaskDialog;
 import com.chmielowski.contexttasklist.view.RemoveTaskDialog;
+import com.chmielowski.contexttasklist.view.TaskCheckBox;
 import com.chmielowski.contexttasklist.view.TaskListView;
 
 
@@ -45,49 +44,23 @@ public class MainActivity extends AppCompatActivity implements TaskListView {
                                final DeleteTaskCommand deleteCommand) {
         int checkboxViewId = View.generateViewId();
         taskListLayout().addView(
-                checkBox(
+                new TaskCheckBox().checkBox(
                         isDone,
                         description,
                         statusCommand,
-                        checkboxViewId,
                         new RemoveTaskDialog(
                                 this,
                                 this,
                                 deleteCommand,
-                                checkboxViewId)
+                                checkboxViewId),
+                        checkboxViewId,
+                        this
                 )
         );
     }
 
     private LinearLayout taskListLayout() {
         return (LinearLayout) findViewById(R.id.taskListLayout);
-    }
-
-    @NonNull
-    private CheckBox checkBox(final boolean isDone,
-                              final String description,
-                              final ChangeStatusCommand statusCommand,
-                              int checkboxViewId,
-                              final RemoveTaskDialog dialog) {
-        final CheckBox task = new CheckBox(this);
-        task.setChecked(isDone);
-        task.setText(description);
-        task.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-                statusCommand.execute(task.isChecked());
-            }
-        });
-        task.setLongClickable(true);
-        task.setId(checkboxViewId);
-
-        task.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View v) {
-                dialog.show();
-                return false;
-            }
-        });
-        return task;
     }
 
     @Override
