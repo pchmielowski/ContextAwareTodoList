@@ -23,7 +23,7 @@ public final class DataBase extends SQLiteOpenHelper implements Persistence {
 
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +
                 this.tableName +
                 " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
