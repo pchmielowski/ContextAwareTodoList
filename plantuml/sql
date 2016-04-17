@@ -1,0 +1,21 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+skinparam nodesep 100
+
+table(Tasks) {
+	primary_key(id)
+		name
+		done
+		list_id
+}
+
+table(Lists) {
+	primary_key(id)
+		name
+}
+
+Tasks "list_id" --right-- "id" Lists
+@enduml
