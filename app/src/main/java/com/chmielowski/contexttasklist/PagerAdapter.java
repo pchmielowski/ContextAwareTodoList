@@ -4,12 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.chmielowski.contexttasklist.view.TaskViewFragment;
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    int numberOfTabs;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
+        this.numberOfTabs = NumOfTabs;
     }
 
     @Override
@@ -17,11 +19,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                TabFragment1 tab1 = new TabFragment1();
-                return tab1;
+                return new TaskViewFragment();
             case 1:
-                TabFragment2 tab2 = new TabFragment2();
-                return tab2;
+                return new TaskViewFragment();
             default:
                 return null;
         }
@@ -29,6 +29,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return numberOfTabs;
     }
 }
