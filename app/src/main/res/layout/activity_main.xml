@@ -7,14 +7,10 @@
     android:fitsSystemWindows="true"
     tools:context="com.chmielowski.contexttasklist.MainActivity">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/fragment_tasklist"
+        android:name="com.chmielowski.contexttasklist.view.TaskViewFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar" />
-
-        <include layout="@layout/task_list" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>

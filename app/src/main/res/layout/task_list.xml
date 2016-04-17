@@ -6,7 +6,19 @@
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.chmielowski.contexttasklist.MainActivity"
-    android:id="@+id/taskListLayout"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
+
+    <Button
+        android:id="@+id/add_task_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add_task" />
+
+    <LinearLayout
+        android:id="@+id/layout_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 </LinearLayout>
