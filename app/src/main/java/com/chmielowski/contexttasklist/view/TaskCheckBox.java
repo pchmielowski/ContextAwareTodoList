@@ -7,7 +7,7 @@ import android.widget.CheckBox;
 
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 
-public final class TaskCheckBox { // TODOL refactor completly
+public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor completly
 
     // Task fields
     private final boolean isDone;
@@ -33,6 +33,7 @@ public final class TaskCheckBox { // TODOL refactor completly
     }
 
     @NonNull
+    @Override
     public CheckBox checkBox() {
         final CheckBox task = new CheckBox(context);
         task.setChecked(isDone);
