@@ -1,0 +1,45 @@
+' Stan przed tabami
+
+@startuml
+package "activity_main.xml" {
+class "<CoordinatorLayout />" {
+}
+class "fragment_tasklist : <Fragment />" {
+}
+"<CoordinatorLayout />" o-- "fragment_tasklist : <Fragment />"
+}
+
+package "task_list.xml" {
+class "<LinearLayout />" {
+}
+class "add_task_button : <Button/>"{
+}
+class "layout_tasks : <LinearLayout />"{
+}
+"<LinearLayout />" o-- "add_task_button : <Button/>"
+"<LinearLayout />" o-- "layout_tasks : <LinearLayout />"
+}
+
+
+hide methods
+hide fields
+hide circle
+
+package MainActivity.java {
+class MainActivity {
+}
+show MainActivity circle
+}
+
+package TaskViewFragment.java {
+class TaskViewFragment {
+}
+show TaskViewFragment circle
+}
+
+"<CoordinatorLayout />" .. MainActivity : represents
+
+"fragment_tasklist : <Fragment />" .. TaskViewFragment : represents
+TaskViewFragment --|> "<LinearLayout />" : inflates
+
+@enduml
