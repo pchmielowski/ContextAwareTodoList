@@ -64,14 +64,8 @@ public class TaskViewFragment extends Fragment implements TaskListView {
                         isDone,
                         description,
                         statusCommand,
-                        new RemoveTaskDialog(
-                                this.v.getContext(),
-                                taskListView,
-                                deleteCommand,
-                                checkboxViewId),
-                        checkboxViewId,
-                        this.v.getContext()
-                ).checkBox()
+                        deleteCommand
+                ).checkBox(this.v.getContext(), this, checkboxViewId)
         );
     }
 

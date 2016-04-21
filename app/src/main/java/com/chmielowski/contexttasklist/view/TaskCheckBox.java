@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
+import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 
 public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor completly
 
@@ -13,28 +14,21 @@ public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor com
     private final boolean isDone;
     private final String description;
     private final ChangeStatusCommand statusCommand;
-    // View
-    private final RemoveTaskDialog dialog;
-    private final int checkboxViewId;
-    private final Context context;
+    private final DeleteTaskCommand deleteCommand;
 
     public TaskCheckBox(final boolean isDone,
                         final String description,
                         final ChangeStatusCommand statusCommand,
-                        final RemoveTaskDialog dialog,
-                        final int checkboxViewId,
-                        final Context context) {
+                        final DeleteTaskCommand deleteCommand) {
         this.isDone = isDone;
         this.description = description;
         this.statusCommand = statusCommand;
-        this.dialog = dialog;
-        this.checkboxViewId = checkboxViewId;
-        this.context = context;
+        this.deleteCommand = deleteCommand;
     }
 
     @NonNull
     @Override
-    public CheckBox checkBox() {
+    public CheckBox checkBox(final Context context, final TaskListView view, final int checkboxViewId) {
         final CheckBox task = new CheckBox(context);
         task.setChecked(isDone);
         task.setText(description);
@@ -48,7 +42,7 @@ public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor com
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
-                dialog.show();
+                new RemoveTaskDialog(context, view, deleteCommand, checkboxViewId).show();
                 return false; // does not matter
             }
         });
