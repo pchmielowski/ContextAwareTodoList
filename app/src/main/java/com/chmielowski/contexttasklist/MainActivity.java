@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -12,11 +14,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab());
-        tabLayout.addTab(tabLayout.newTab());
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        int numLists = 2;
+        for (int listIdx = 0; listIdx < numLists; listIdx++) {
+            tabLayout.addTab(tabLayout.newTab());
+        }
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        Button addTaskButton = (Button) findViewById(R.id.add_list_button);
+        addTaskButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                tabLayout.addTab(tabLayout.newTab());
+                inflateViewPager(tabLayout);
+            }
+        });
+
+        inflateViewPager(tabLayout);
+    }
+
+    private void inflateViewPager(TabLayout tabLayout) {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new PagerAdapter(
                 getSupportFragmentManager(),
