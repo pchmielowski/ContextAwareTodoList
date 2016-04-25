@@ -98,6 +98,10 @@ public final class TaskViewFragment extends Fragment implements TaskListView {
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name TEXT"
                 + ");");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('first');");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('second');");
     }
 
     @Override
