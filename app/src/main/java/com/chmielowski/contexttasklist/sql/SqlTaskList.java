@@ -9,17 +9,21 @@ import com.chmielowski.contexttasklist.view.TaskListView;
 import java.util.List;
 
 public final class SqlTaskList implements TaskList {
-    private final Persistence dataBase;
+    private final Persistence tasksDataBase;
+    private final Persistence listsDataBase;
 
-    public SqlTaskList(final Persistence sql) {
-        this.dataBase = sql;
+    public SqlTaskList(final int id,
+                       final Persistence tasksDB,
+                       Persistence listsDB) {
+        this.tasksDataBase = tasksDB;
+        this.listsDataBase = listsDB;
     }
 
     @Override
     public void showOn(final TaskListView view) throws Exception {
         view.clean();
         for (Integer index : indexes()) {
-            new SqlTask(index, dataBase).showOn(view);
+            new SqlTask(index, tasksDataBase).showOn(view);
         }
     }
 
@@ -28,10 +32,10 @@ public final class SqlTaskList implements TaskList {
         ContentValues cv = new ContentValues();
         cv.put("name", nm);
         cv.put("done", 0);
-        dataBase.insert(cv);
+        tasksDataBase.insert(cv);
     }
 
     private List<Integer> indexes() throws Exception {
-        return dataBase.integers("id", "");
+        return tasksDataBase.integers("id", "");
     }
 }

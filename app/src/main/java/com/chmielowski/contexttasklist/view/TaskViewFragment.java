@@ -29,8 +29,12 @@ public class TaskViewFragment extends Fragment implements TaskListView {
             Bundle savedInstanceState
     ) {
         v = inflater.inflate(R.layout.task_list, container, false);
-        Persistence dataBase = new DataBase(v.getContext(), "Tasks");
-        final TaskList taskList = new SqlTaskList(dataBase);
+        Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
+        Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
+        int taskListId = 0;
+        final TaskList taskList = new SqlTaskList(taskListId,
+                tasksDataBase,
+                listsDataBase);
         try {
             taskList.showOn(this);
         } catch (Exception e) {
