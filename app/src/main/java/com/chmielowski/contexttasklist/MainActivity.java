@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.chmielowski.contexttasklist.sql.DataBase;
+import com.chmielowski.contexttasklist.view.AddListDialog;
 
 import java.util.List;
 
@@ -25,8 +26,7 @@ public final class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.action_add_list) {
             final TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
-            tabs.addTab(tabs.newTab());
-            inflateViewPager(tabs);
+            new AddListDialog(this, tabs).show();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
@@ -38,18 +38,20 @@ public final class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-
         Persistence listsDataBase = new DataBase(this, "Lists");
+
+
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         try {
             List<Integer> listIndexes = listsDataBase.integers("id", "");
             for (int listIdx : listIndexes) {
+                String listName = listsDataBase.string(
+                        "name",
+                        "id=" + listIdx);
                 tabLayout.addTab(
                         tabLayout
                                 .newTab()
-                                .setText(listsDataBase.string(
-                                        "name",
-                                        "id=" + listIdx)));
+                                .setText(listName));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +59,7 @@ public final class MainActivity extends AppCompatActivity {
         inflateViewPager(tabLayout);
     }
 
-    private void inflateViewPager(TabLayout tabLayout) {
+    public void inflateViewPager(TabLayout tabLayout) {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new PagerAdapter(
                 getSupportFragmentManager(),
