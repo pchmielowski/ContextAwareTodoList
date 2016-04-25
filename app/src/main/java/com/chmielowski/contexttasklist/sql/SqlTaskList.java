@@ -15,7 +15,7 @@ public final class SqlTaskList implements TaskList {
 
     public SqlTaskList(final int id,
                        final Persistence tasksDB,
-                       Persistence listsDB) {
+                       final Persistence listsDB) {
         this.tasksDataBase = tasksDB;
         this.listsDataBase = listsDB;
         this.listId = id;

@@ -19,23 +19,23 @@ import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.sql.DataBase;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 
-public class TaskViewFragment extends Fragment implements TaskListView {
+public final class TaskViewFragment extends Fragment implements TaskListView {
 
     private View v;
 
     @Nullable
     @Override
     public View onCreateView(
-            LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
+            final LayoutInflater inflater,
+            final ViewGroup container,
+            final Bundle savedInstanceState
     ) {
         v = inflater.inflate(R.layout.task_list, container, false);
         createTasksTable();
         createListsTable();
         Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
         Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
-        int taskListId = getArguments().getInt("id", 0);;
+        int taskListId = getArguments().getInt("id", 0);
         final TaskList taskList = new SqlTaskList(taskListId,
                 tasksDataBase,
                 listsDataBase);
@@ -44,7 +44,10 @@ public class TaskViewFragment extends Fragment implements TaskListView {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        final AddTaskDialog dialog = new AddTaskDialog(v.getContext(), this, taskList);
+        final AddTaskDialog dialog = new AddTaskDialog(
+                v.getContext(),
+                this,
+                taskList);
         Button addTaskButton = (Button) v.findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
@@ -57,45 +60,51 @@ public class TaskViewFragment extends Fragment implements TaskListView {
     private void createTasksTable() {
         SQLiteOpenHelper sql = new SQLiteOpenHelper(getContext(), "tasks.db", null, 1) {
             @Override
-            public void onCreate(SQLiteDatabase db) {
+            public void onCreate(final SQLiteDatabase db) {
             }
 
             @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            public void onUpgrade(final SQLiteDatabase db,
+                                  final int oldVersion,
+                                  final int newVersion) {
             }
         };
-        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
-                "Tasks" +
-                " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT, " +
-                "done INTEGER," +
-                "list INTEGER" +
-                ");");
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
+                + "Tasks"
+                + " ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "name TEXT, "
+                + "done INTEGER,"
+                + "list INTEGER"
+                + ");");
     }
+
     private void createListsTable() {
-        SQLiteOpenHelper sql = new SQLiteOpenHelper(getContext(), "tasks.db", null, 1) {
+        SQLiteOpenHelper sql = new SQLiteOpenHelper(
+                getContext(), "tasks.db", null, 1) {
             @Override
-            public void onCreate(SQLiteDatabase db) {
+            public void onCreate(final SQLiteDatabase db) {
             }
 
             @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            public void onUpgrade(final SQLiteDatabase db,
+                                  final int oldVersion,
+                                  final int newVersion) {
             }
         };
-        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
-                "Lists" +
-                " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT" +
-                ");");
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
+                + "Lists"
+                + " ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "name TEXT"
+                + ");");
     }
 
     @Override
-    public final void showTask(final boolean isDone,
-                               final String description,
-                               final ChangeStatusCommand statusCommand,
-                               final DeleteTaskCommand deleteCommand) {
+    public void showTask(final boolean isDone,
+                         final String description,
+                         final ChangeStatusCommand statusCommand,
+                         final DeleteTaskCommand deleteCommand) {
         taskListLayout().addView(
                 new TaskCheckBox(
                         isDone,
@@ -111,7 +120,7 @@ public class TaskViewFragment extends Fragment implements TaskListView {
     }
 
     @Override
-    public final void removeTask(final int id) {
+    public void removeTask(final int id) {
         try {
             taskListLayout().removeView(v.findViewById(id));
         } catch (Exception e) {
@@ -120,7 +129,7 @@ public class TaskViewFragment extends Fragment implements TaskListView {
     }
 
     @Override
-    public final void clean() {
+    public void clean() {
         taskListLayout().removeAllViews();
     }
 

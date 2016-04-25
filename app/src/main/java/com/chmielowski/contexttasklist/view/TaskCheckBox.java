@@ -27,7 +27,9 @@ public final class TaskCheckBox implements ITaskCheckbox {
 
     @NonNull
     @Override
-    public CheckBox showOn(final Context context, final TaskListView view, final int checkboxViewId) {
+    public CheckBox showOn(final Context context,
+                           final TaskListView view,
+                           final int checkboxViewId) {
         final CheckBox task = new CheckBox(context);
         task.setChecked(isDone);
         task.setText(description);

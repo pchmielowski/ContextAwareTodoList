@@ -19,26 +19,27 @@ public class MainActivity extends AppCompatActivity {
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new PagerAdapter(
-                                    getSupportFragmentManager(),
-                                    tabLayout.getTabCount()));
+                getSupportFragmentManager(),
+                tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(
                 new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                viewPager.setCurrentItem(position);
-            }
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(final TabLayout.Tab tab) {
+                        int position = tab.getPosition();
+                        viewPager.setCurrentItem(position);
+                    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                    @Override
+                    public void onTabUnselected(final TabLayout.Tab tab) {
 
-            }
+                    }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                    @Override
+                    public void onTabReselected(final TabLayout.Tab tab) {
 
-            }
-        });
+                    }
+                });
     }
 }

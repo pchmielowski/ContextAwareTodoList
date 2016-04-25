@@ -7,19 +7,19 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.chmielowski.contexttasklist.view.TaskViewFragment;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
-    int numberOfTabs;
+public final class PagerAdapter extends FragmentStatePagerAdapter {
+    private int numberOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public PagerAdapter(final FragmentManager fm, final int numTabs) {
         super(fm);
-        this.numberOfTabs = NumOfTabs;
+        this.numberOfTabs = numTabs;
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(final int tabNumber) {
         Fragment fragment = new TaskViewFragment();
         Bundle args = new Bundle();
-        args.putInt("id", position);
+        args.putInt("id", tabNumber);
         fragment.setArguments(args);
         return fragment;
     }
