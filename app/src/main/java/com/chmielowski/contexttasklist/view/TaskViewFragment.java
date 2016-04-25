@@ -32,6 +32,7 @@ public class TaskViewFragment extends Fragment implements TaskListView {
     ) {
         v = inflater.inflate(R.layout.task_list, container, false);
         createTasksTable();
+        createListsTable();
         Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
         Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
         int taskListId = 0;
@@ -68,7 +69,25 @@ public class TaskViewFragment extends Fragment implements TaskListView {
                 " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT, " +
-                "done INTEGER" +
+                "done INTEGER," +
+                "list INTEGER" +
+                ");");
+    }
+    private void createListsTable() {
+        SQLiteOpenHelper sql = new SQLiteOpenHelper(getContext(), "tasks.db", null, 1) {
+            @Override
+            public void onCreate(SQLiteDatabase db) {
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            }
+        };
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
+                "Lists" +
+                " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT" +
                 ");");
     }
 
