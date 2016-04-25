@@ -9,6 +9,7 @@ import com.chmielowski.contexttasklist.view.TaskListView;
 import java.util.List;
 
 public final class SqlTaskList implements TaskList {
+    private final int listId;
     private final Persistence tasksDataBase;
     private final Persistence listsDataBase;
 
@@ -17,6 +18,7 @@ public final class SqlTaskList implements TaskList {
                        Persistence listsDB) {
         this.tasksDataBase = tasksDB;
         this.listsDataBase = listsDB;
+        this.listId = id;
     }
 
     @Override
@@ -32,10 +34,11 @@ public final class SqlTaskList implements TaskList {
         ContentValues cv = new ContentValues();
         cv.put("name", nm);
         cv.put("done", 0);
+        cv.put("list", this.listId);
         tasksDataBase.insert(cv);
     }
 
     private List<Integer> indexes() throws Exception {
-        return tasksDataBase.integers("id", "");
+        return tasksDataBase.integers("id", "list=" + this.listId);
     }
 }
