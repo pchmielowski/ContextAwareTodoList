@@ -1,5 +1,6 @@
 package com.chmielowski.contexttasklist;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,15 +17,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        switch (position) {
-            case 0:
-                return new TaskViewFragment();
-            case 1:
-                return new TaskViewFragment();
-            default:
-                return null;
-        }
+        Fragment fragment = new TaskViewFragment();
+        Bundle args = new Bundle();
+        args.putInt("id", position);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

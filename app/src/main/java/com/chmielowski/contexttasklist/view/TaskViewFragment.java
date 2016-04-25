@@ -35,7 +35,7 @@ public class TaskViewFragment extends Fragment implements TaskListView {
         createListsTable();
         Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
         Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
-        int taskListId = 0;
+        int taskListId = getArguments().getInt("id", 0);;
         final TaskList taskList = new SqlTaskList(taskListId,
                 tasksDataBase,
                 listsDataBase);
