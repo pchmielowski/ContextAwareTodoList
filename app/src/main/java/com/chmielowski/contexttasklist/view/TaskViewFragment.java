@@ -46,26 +46,18 @@ public class TaskViewFragment extends Fragment implements TaskListView {
         return v;
     }
 
-//    public final void addTaskChbx(TaskCheckBox taskCheckBox) {
-//        int checkboxViewId = View.generateViewId();
-//        TaskListView taskListView = (TaskListView) this;
-//        taskListLayout().addView(taskCheckBox.checkBox());
-//    }
-
     @Override
     public final void showTask(final boolean isDone,
                                final String description,
                                final ChangeStatusCommand statusCommand,
                                final DeleteTaskCommand deleteCommand) {
-        int checkboxViewId = View.generateViewId();
-        TaskListView taskListView = (TaskListView) this;
         taskListLayout().addView(
                 new TaskCheckBox(
                         isDone,
                         description,
                         statusCommand,
                         deleteCommand
-                ).checkBox(this.v.getContext(), this, checkboxViewId)
+                ).showOn(this.v.getContext(), this, View.generateViewId())
         );
     }
 

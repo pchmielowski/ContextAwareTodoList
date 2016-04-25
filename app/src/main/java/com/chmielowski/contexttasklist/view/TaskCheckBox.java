@@ -8,9 +8,8 @@ import android.widget.CheckBox;
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 
-public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor completly
+public final class TaskCheckBox implements ITaskCheckbox {
 
-    // Task fields
     private final boolean isDone;
     private final String description;
     private final ChangeStatusCommand statusCommand;
@@ -28,7 +27,7 @@ public final class TaskCheckBox implements ITaskCheckbox { // TODOL refactor com
 
     @NonNull
     @Override
-    public CheckBox checkBox(final Context context, final TaskListView view, final int checkboxViewId) {
+    public CheckBox showOn(final Context context, final TaskListView view, final int checkboxViewId) {
         final CheckBox task = new CheckBox(context);
         task.setChecked(isDone);
         task.setText(description);

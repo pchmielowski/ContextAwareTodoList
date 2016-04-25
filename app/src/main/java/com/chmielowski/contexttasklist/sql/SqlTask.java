@@ -26,38 +26,6 @@ public final class SqlTask implements Task {
         );
     }
 
-//    public void addToView(final TaskListView view) throws Exception {
-//        int checkboxViewId = View.generateViewId(); // out of responsibility
-//        return new TaskCheckBox(
-//                this.isDone(),
-//                this.name(),
-//                new ChangeTaskStatusCommand(this),
-//                new RemoveTaskDialog(
-//                        this.v.getContext(),  // out of responsibility
-//                        view, // may be out of responsibility
-//                        new DeleteTaskCommand(this),
-//                        checkboxViewId),  // out of responsibility
-//                checkboxViewId,  // out of responsibility
-//                this.v.getContext()  // out of responsibility
-//        );
-
-//        should look similar to one of these. I think, third is OK, but let's start with first!
-//  1.
-//        this.isDone(),
-//        this.name(),
-//        new ChangeTaskStatusCommand(this),
-//        new DeleteTaskCommand(this)
-//  2.
-//        return view.checkBox().withStatus(this.isDone()).withName(this.name()).withChangeTaskStatusCommand(new ...).withDeleteTaskCommand(new ...);
-//  3.
-//        return new ChangeableChbx(
-//                   new DeletableChbx(
-//                         view.checkBox(isDone, name),
-//                         new DeleteTaskCommand()),
-//                   new ChangeTaskCommand())
-//   Q: return to TaskList and let him add to view OR add to view on Task's own
-//    }
-
     @Override
     public void status(final boolean done) {
         dataBase.setBool(done, this.condition);

@@ -6,5 +6,5 @@ import android.widget.CheckBox;
 
 public interface ITaskCheckbox {
     @NonNull
-    CheckBox checkBox(Context context, TaskListView view, int checkboxViewId);
+    CheckBox showOn(Context context, TaskListView view, int checkboxViewId);
 }
