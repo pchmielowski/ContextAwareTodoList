@@ -18,10 +18,12 @@ android {
                     'proguard-rules.pro'
         }
     }
-
     dependencies {
         provided 'org.projectlombok:lombok:1.16.8'
         androidTestCompile 'junit:junit:4.12'
+    }      
+    lintOptions {
+        abortOnError false
     }
 }
 
