@@ -1,8 +1,10 @@
 package com.chmielowski.contexttasklist.view;
 
-import android.support.v4.app.Fragment;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class TaskViewFragment extends Fragment implements TaskListView {
             Bundle savedInstanceState
     ) {
         v = inflater.inflate(R.layout.task_list, container, false);
+        createTasksTable();
         Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
         Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
         int taskListId = 0;
@@ -48,6 +51,25 @@ public class TaskViewFragment extends Fragment implements TaskListView {
             }
         });
         return v;
+    }
+
+    private void createTasksTable() {
+        SQLiteOpenHelper sql = new SQLiteOpenHelper(getContext(), "tasks.db", null, 1) {
+            @Override
+            public void onCreate(SQLiteDatabase db) {
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            }
+        };
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS " +
+                "Tasks" +
+                " (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT, " +
+                "done INTEGER" +
+                ");");
     }
 
     @Override
