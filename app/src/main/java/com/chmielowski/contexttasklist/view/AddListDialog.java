@@ -2,19 +2,27 @@ package com.chmielowski.contexttasklist.view;
 
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
 import android.text.InputType;
 import android.widget.EditText;
 
+import com.chmielowski.contexttasklist.MainActivity;
+import com.chmielowski.contexttasklist.sql.DataBase;
+
 public final class AddListDialog
         implements QuestionDialog {
 
+    private final MainActivity activity;
     private final Context context;
     private final TabLayout tabs;
 
-    public AddListDialog(Context ctx, TabLayout tabLayout) {
+    public AddListDialog(final MainActivity activity,
+                         final Context ctx,
+                         final TabLayout tabLayout) {
+        this.activity = activity;
         this.context = ctx;
         this.tabs = tabLayout;
     }
@@ -29,7 +37,17 @@ public final class AddListDialog
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                tabs.addTab(tabs.newTab().setText(input.getText()));
+                try {
+                    ContentValues cv = new ContentValues();
+                    cv.put("name", String.valueOf(input.getText()));
+                    new DataBase(
+                            activity.getApplicationContext(),
+                            "Lists")
+                            .insert(cv);
+                    activity.addTab(String.valueOf(input.getText()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         builder.setNegativeButton("Cancel",

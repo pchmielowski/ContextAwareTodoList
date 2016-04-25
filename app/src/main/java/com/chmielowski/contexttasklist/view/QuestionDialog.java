@@ -1,5 +1,5 @@
 package com.chmielowski.contexttasklist.view;
 
 public interface QuestionDialog {
-    void show();
+    void show() throws Exception;
 }

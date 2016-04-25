@@ -92,6 +92,7 @@ public final class TaskViewFragment extends Fragment implements TaskListView {
                                   final int newVersion) {
             }
         };
+//        sql.getWritableDatabase().execSQL("DROP TABLE Lists;");
         sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
                 + "Lists"
                 + " ("
@@ -102,6 +103,8 @@ public final class TaskViewFragment extends Fragment implements TaskListView {
 //                + " (name) VALUES ('first');");
 //        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
 //                + " (name) VALUES ('second');");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('third');");
     }
 
     @Override

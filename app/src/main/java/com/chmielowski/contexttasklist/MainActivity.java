@@ -16,6 +16,8 @@ import java.util.List;
 
 public final class MainActivity extends AppCompatActivity {
 
+    private final Persistence listsDataBase = new DataBase(this, "Lists");
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -26,7 +28,7 @@ public final class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.action_add_list) {
             final TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
-            new AddListDialog(this, tabs).show();
+            new AddListDialog(this, this, tabs).show();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
@@ -37,33 +39,37 @@ public final class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-
-        Persistence listsDataBase = new DataBase(this, "Lists");
-
-
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         try {
-            List<Integer> listIndexes = listsDataBase.integers("id", "");
+            List<Integer> listIndexes = listIndexes();
             for (int listIdx : listIndexes) {
                 String listName = listsDataBase.string(
                         "name",
                         "id=" + listIdx);
-                tabLayout.addTab(
-                        tabLayout
-                                .newTab()
-                                .setText(listName));
+                this.addTab(listName);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        inflateViewPager(tabLayout);
     }
 
-    public void inflateViewPager(TabLayout tabLayout) {
+    private List<Integer> listIndexes() throws Exception {
+        return this.listsDataBase.integers("id", "");
+    }
+
+    public void addTab(String text) throws Exception {
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(
+                tabLayout
+                        .newTab()
+                        .setText(text));
+        inflateViewPager(tabLayout, listIndexes());
+    }
+
+    private void inflateViewPager(TabLayout tabLayout, List<Integer> listIndexes) {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new PagerAdapter(
                 getSupportFragmentManager(),
-                tabLayout.getTabCount()));
+                listIndexes));
         viewPager.addOnPageChangeListener(
                 new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(
