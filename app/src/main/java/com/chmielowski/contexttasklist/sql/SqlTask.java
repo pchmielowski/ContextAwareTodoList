@@ -4,7 +4,7 @@ import com.chmielowski.contexttasklist.Persistence;
 import com.chmielowski.contexttasklist.Task;
 import com.chmielowski.contexttasklist.commands.ChangeTaskStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
-import com.chmielowski.contexttasklist.view.TaskListView;
+import com.chmielowski.contexttasklist.view.ListView;
 
 public final class SqlTask implements Task {
 
@@ -17,7 +17,7 @@ public final class SqlTask implements Task {
     }
 
     @Override
-    public void showOn(final TaskListView view) throws Exception {
+    public void showOn(final ListView view) throws Exception {
         view.showTask(
                 this.isDone(),
                 this.name(),

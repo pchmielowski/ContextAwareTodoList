@@ -8,7 +8,7 @@ import android.text.InputType;
 import android.widget.EditText;
 
 import com.chmielowski.contexttasklist.TaskList;
-import com.chmielowski.contexttasklist.view.TaskListView;
+import com.chmielowski.contexttasklist.view.ListView;
 
 public final class AddTaskDialog
         extends TaskListDialog
@@ -16,7 +16,7 @@ public final class AddTaskDialog
     private final TaskList taskList;
 
     public AddTaskDialog(final Context ctx,
-                         final TaskListView vw,
+                         final ListView vw,
                          final TaskList tlist) {
         super(ctx, vw);
         this.taskList = tlist;
@@ -29,7 +29,7 @@ public final class AddTaskDialog
         final EditText input = new EditText(this.context);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
-        final TaskListView view = this.view;
+        final ListView view = this.view;
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {

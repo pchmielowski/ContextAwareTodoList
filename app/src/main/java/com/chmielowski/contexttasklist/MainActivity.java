@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.chmielowski.contexttasklist.sql.DataBase;
+import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 import com.chmielowski.contexttasklist.view.PagerAdapter;
 
@@ -17,7 +17,7 @@ import java.util.List;
 
 public final class MainActivity extends AppCompatActivity {
 
-    private final Persistence listsDataBase = new DataBase(this, "Lists");
+    private final Persistence listsDataBase = new SqlPersistence(this, "Lists");
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {

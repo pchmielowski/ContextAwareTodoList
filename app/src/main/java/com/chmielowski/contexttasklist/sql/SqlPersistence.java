@@ -11,12 +11,12 @@ import com.chmielowski.contexttasklist.Persistence;
 import java.util.List;
 import java.util.Vector;
 
-public final class DataBase extends SQLiteOpenHelper implements Persistence {
+public final class SqlPersistence extends SQLiteOpenHelper implements Persistence {
 
     private final String tableName;
     private static final int FIRST_COLUMN = 0;
 
-    public DataBase(final Context context, final String tblName) {
+    public SqlPersistence(final Context context, final String tblName) {
         super(context, "tasks.db", null, 1);
         this.tableName = tblName;
     }

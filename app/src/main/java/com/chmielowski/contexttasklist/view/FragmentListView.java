@@ -16,11 +16,11 @@ import com.chmielowski.contexttasklist.R;
 import com.chmielowski.contexttasklist.TaskList;
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
-import com.chmielowski.contexttasklist.sql.DataBase;
+import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.dialog.AddTaskDialog;
 
-public final class TaskViewFragment extends Fragment implements TaskListView {
+public final class FragmentListView extends Fragment implements ListView {
 
     private View v;
 
@@ -34,8 +34,8 @@ public final class TaskViewFragment extends Fragment implements TaskListView {
         v = inflater.inflate(R.layout.task_list, container, false);
         createTasksTable();
         createListsTable();
-        Persistence tasksDataBase = new DataBase(v.getContext(), "Tasks");
-        Persistence listsDataBase = new DataBase(v.getContext(), "Lists");
+        Persistence tasksDataBase = new SqlPersistence(v.getContext(), "Tasks");
+        Persistence listsDataBase = new SqlPersistence(v.getContext(), "Lists");
         int taskListId = getArguments().getInt("id", 0);
         final TaskList taskList = new SqlTaskList(taskListId,
                 tasksDataBase,
@@ -114,7 +114,7 @@ public final class TaskViewFragment extends Fragment implements TaskListView {
                          final ChangeStatusCommand statusCommand,
                          final DeleteTaskCommand deleteCommand) {
         taskListLayout().addView(
-                new TaskCheckBox(
+                new CheckboxTaskView(
                         isDone,
                         description,
                         statusCommand,

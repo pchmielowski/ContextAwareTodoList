@@ -3,7 +3,7 @@ package com.chmielowski.contexttasklist;
 import com.chmielowski.contexttasklist.commands.ChangeTaskStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.sql.SqlTask;
-import com.chmielowski.contexttasklist.view.TaskListView;
+import com.chmielowski.contexttasklist.view.ListView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class SqlTaskTest {
 
     @Mock
-    TaskListView view;
+    ListView view;
 
     @Mock
     Persistence dataBase;

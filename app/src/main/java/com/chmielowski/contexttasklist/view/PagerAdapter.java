@@ -20,7 +20,7 @@ public final class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(final int tabNumber) {
-        Fragment fragment = new TaskViewFragment();
+        Fragment fragment = new FragmentListView();
         Bundle args = new Bundle();
         args.putInt("id", listIndexes.get(tabNumber));
         fragment.setArguments(args);

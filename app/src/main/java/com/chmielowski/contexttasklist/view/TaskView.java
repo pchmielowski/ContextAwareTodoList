@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.CheckBox;
 
-public interface ITaskCheckbox {
+public interface TaskView {
     @NonNull
-    CheckBox showOn(Context context, TaskListView view, int checkboxViewId);
+    CheckBox showOn(Context context, ListView view, int checkboxViewId);
 }

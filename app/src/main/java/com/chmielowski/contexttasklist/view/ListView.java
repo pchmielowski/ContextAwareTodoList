@@ -4,7 +4,7 @@ package com.chmielowski.contexttasklist.view;
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 
-public interface TaskListView {
+public interface ListView {
     void showTask(boolean isDone, String description,
                   ChangeStatusCommand command,
                   DeleteTaskCommand dltCommand);

@@ -1,9 +1,9 @@
 package com.chmielowski.contexttasklist;
 
-import com.chmielowski.contexttasklist.view.TaskListView;
+import com.chmielowski.contexttasklist.view.ListView;
 
 public interface Task {
-    void showOn(TaskListView view) throws Exception;
+    void showOn(ListView view) throws Exception;
 
     void status(boolean done);
 

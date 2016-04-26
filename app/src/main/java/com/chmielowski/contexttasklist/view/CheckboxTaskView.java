@@ -9,17 +9,17 @@ import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.view.dialog.RemoveTaskDialog;
 
-public final class TaskCheckBox implements ITaskCheckbox {
+public final class CheckboxTaskView implements TaskView {
 
     private final boolean isDone;
     private final String description;
     private final ChangeStatusCommand statusCommand;
     private final DeleteTaskCommand deleteCommand;
 
-    public TaskCheckBox(final boolean isDone,
-                        final String description,
-                        final ChangeStatusCommand statusCommand,
-                        final DeleteTaskCommand deleteCommand) {
+    public CheckboxTaskView(final boolean isDone,
+                            final String description,
+                            final ChangeStatusCommand statusCommand,
+                            final DeleteTaskCommand deleteCommand) {
         this.isDone = isDone;
         this.description = description;
         this.statusCommand = statusCommand;
@@ -29,7 +29,7 @@ public final class TaskCheckBox implements ITaskCheckbox {
     @NonNull
     @Override
     public CheckBox showOn(final Context context,
-                           final TaskListView view,
+                           final ListView view,
                            final int checkboxViewId) {
         final CheckBox task = new CheckBox(context);
         task.setChecked(isDone);

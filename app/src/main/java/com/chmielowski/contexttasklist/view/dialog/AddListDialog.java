@@ -10,7 +10,7 @@ import android.text.InputType;
 import android.widget.EditText;
 
 import com.chmielowski.contexttasklist.MainActivity;
-import com.chmielowski.contexttasklist.sql.DataBase;
+import com.chmielowski.contexttasklist.sql.SqlPersistence;
 
 public final class AddListDialog
         implements QuestionDialog {
@@ -40,7 +40,7 @@ public final class AddListDialog
                 try {
                     ContentValues cv = new ContentValues();
                     cv.put("name", String.valueOf(input.getText()));
-                    new DataBase(
+                    new SqlPersistence(
                             activity.getApplicationContext(),
                             "Lists")
                             .insert(cv);
