@@ -8,7 +8,6 @@ import android.text.InputType;
 import android.widget.EditText;
 
 import com.chmielowski.contexttasklist.TaskList;
-import com.chmielowski.contexttasklist.view.TaskListDialog;
 import com.chmielowski.contexttasklist.view.TaskListView;
 
 public final class AddTaskDialog
