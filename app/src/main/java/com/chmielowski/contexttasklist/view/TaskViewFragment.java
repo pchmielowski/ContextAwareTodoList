@@ -18,6 +18,7 @@ import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
 import com.chmielowski.contexttasklist.sql.DataBase;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
+import com.chmielowski.contexttasklist.view.dialog.AddTaskDialog;
 
 public final class TaskViewFragment extends Fragment implements TaskListView {
 

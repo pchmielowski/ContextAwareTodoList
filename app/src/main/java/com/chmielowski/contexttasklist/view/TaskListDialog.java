@@ -2,7 +2,9 @@ package com.chmielowski.contexttasklist.view;
 
 import android.content.Context;
 
-public abstract class TaskListDialog implements QuestionDialog  {
+import com.chmielowski.contexttasklist.view.dialog.QuestionDialog;
+
+public abstract class TaskListDialog implements QuestionDialog {
     protected final TaskListView view;
     protected final Context context;
 

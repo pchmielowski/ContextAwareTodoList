@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 
 import com.chmielowski.contexttasklist.commands.ChangeStatusCommand;
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
+import com.chmielowski.contexttasklist.view.dialog.RemoveTaskDialog;
 
 public final class TaskCheckBox implements ITaskCheckbox {
 

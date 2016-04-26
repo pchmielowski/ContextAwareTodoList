@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.chmielowski.contexttasklist.sql.DataBase;
-import com.chmielowski.contexttasklist.view.AddListDialog;
+import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 import com.chmielowski.contexttasklist.view.PagerAdapter;
 
 import java.util.List;

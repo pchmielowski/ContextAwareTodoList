@@ -1,10 +1,13 @@
-package com.chmielowski.contexttasklist.view;
+package com.chmielowski.contexttasklist.view.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
 import com.chmielowski.contexttasklist.commands.DeleteTaskCommand;
+import com.chmielowski.contexttasklist.view.TaskListDialog;
+import com.chmielowski.contexttasklist.view.TaskListView;
+import com.chmielowski.contexttasklist.view.dialog.QuestionDialog;
 
 public final class RemoveTaskDialog
         extends TaskListDialog
