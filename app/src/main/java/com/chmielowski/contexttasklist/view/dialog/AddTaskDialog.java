@@ -35,7 +35,7 @@ public final class AddTaskDialog
             public void onClick(final DialogInterface dialog, final int which) {
                 taskList.addTask(input.getText().toString());
                 try {
-                    taskList.showOn(view);
+                    taskList.showTasksOn(view);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

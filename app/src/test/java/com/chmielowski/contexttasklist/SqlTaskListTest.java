@@ -22,7 +22,7 @@ package com.chmielowski.contexttasklist;
 ////        SqlTaskList taskList = new SqlTaskList(dataBase);
 ////
 ////        // act
-////        taskList.showOn(view);
+////        taskList.showTasksOn(view);
 ////
 ////        // assert
 ////        verify(dataBase).getTasks();
@@ -45,9 +45,9 @@ package com.chmielowski.contexttasklist;
 ////        SqlTaskList taskList = new SqlTaskList(dataBase);
 ////
 ////        // act
-////        taskList.showOn(view);
+////        taskList.showTasksOn(view);
 ////
 ////        // assert
-////        verify(task).showOn(view);
+////        verify(task).showTasksOn(view);
 ////    }
 //}

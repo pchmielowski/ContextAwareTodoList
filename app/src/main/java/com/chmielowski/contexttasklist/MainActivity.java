@@ -59,7 +59,7 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
         return this.listsDataBase.integers("id", "");
     }
 
-    public void addTab(final String text) throws Exception {
+    private void addTab(final String text) throws Exception {
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(
                 tabLayout

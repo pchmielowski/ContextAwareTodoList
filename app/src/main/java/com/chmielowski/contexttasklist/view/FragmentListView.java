@@ -41,7 +41,7 @@ public final class FragmentListView extends Fragment implements ListView {
                 tasksDataBase,
                 listsDataBase);
         try {
-            taskList.showOn(this);
+            taskList.showTasksOn(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
