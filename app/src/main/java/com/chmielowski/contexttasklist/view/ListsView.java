@@ -1,5 +1,5 @@
 package com.chmielowski.contexttasklist.view;
 
 public interface ListsView {
-    void showList() throws Exception;
+    void showList(String name) throws Exception;
 }

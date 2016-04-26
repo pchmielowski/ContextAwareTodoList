@@ -31,8 +31,8 @@ public final class SqlTaskList implements TaskList {
     }
 
     @Override
-    public void showOn(ListsView view) throws Exception {
-        view.showList();
+    public void showOn(final ListsView view) throws Exception {
+        view.showList(listsDataBase.string("name", "id=" + this.listId));
     }
 
     @Override

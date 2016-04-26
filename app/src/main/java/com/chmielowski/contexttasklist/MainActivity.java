@@ -59,7 +59,7 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
         return this.listsDataBase.integers("id", "");
     }
 
-    public void addTab(String text) throws Exception {
+    public void addTab(final String text) throws Exception {
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(
                 tabLayout
@@ -69,8 +69,8 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
     }
 
     @Override
-    public void showList() throws Exception {
-        this.addTab("dummy");
+    public void showList(final String name) throws Exception {
+        this.addTab(name);
     }
 
     private void inflateViewPager(TabLayout tabLayout, List<Integer> listIndexes) {
