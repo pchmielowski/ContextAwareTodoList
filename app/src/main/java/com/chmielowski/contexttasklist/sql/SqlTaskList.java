@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import com.chmielowski.contexttasklist.Persistence;
 import com.chmielowski.contexttasklist.TaskList;
 import com.chmielowski.contexttasklist.view.ListView;
+import com.chmielowski.contexttasklist.view.ListsView;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public final class SqlTaskList implements TaskList {
         for (Integer index : indexes()) {
             new SqlTask(index, tasksDataBase).showOn(view);
         }
+    }
+
+    @Override
+    public void showOn(ListsView view) throws Exception {
+        view.showList();
     }
 
     @Override

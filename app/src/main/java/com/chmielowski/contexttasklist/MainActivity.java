@@ -9,13 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
+import com.chmielowski.contexttasklist.view.ListsView;
 import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 import com.chmielowski.contexttasklist.view.PagerAdapter;
 
 import java.util.List;
 
 
-public final class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity implements ListsView {
 
     private final Persistence listsDataBase = new SqlPersistence(this, "Lists");
 
@@ -46,7 +47,7 @@ public final class MainActivity extends AppCompatActivity {
                 String listName = listsDataBase.string(
                         "name",
                         "id=" + listIdx);
-                this.addTab(listName);
+//                this.addTab(listName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,6 +66,9 @@ public final class MainActivity extends AppCompatActivity {
                         .setText(text));
         inflateViewPager(tabLayout, listIndexes());
     }
+
+    @Override
+    public void showList() {}
 
     private void inflateViewPager(TabLayout tabLayout, List<Integer> listIndexes) {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
