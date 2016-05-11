@@ -19,10 +19,10 @@ public final class AddListDialog
     private final Context context;
     private final TabLayout tabs;
 
-    public AddListDialog(final MainActivity activity,
+    public AddListDialog(final MainActivity mainActivity,
                          final Context ctx,
                          final TabLayout tabLayout) {
-        this.activity = activity;
+        this.activity = mainActivity;
         this.context = ctx;
         this.tabs = tabLayout;
     }
@@ -38,16 +38,21 @@ public final class AddListDialog
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 try {
-                    ContentValues cv = new ContentValues();
-                    cv.put("name", String.valueOf(input.getText()));
-                    new SqlPersistence(
-                            activity.getApplicationContext(),
-                            "Lists")
-                            .insert(cv);
-                    activity.addTab(String.valueOf(input.getText()));
+                    createTaskList();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            private void createTaskList() throws Exception {
+                ContentValues cv = new ContentValues();
+                cv.put("name", String.valueOf(input.getText()));
+                new SqlPersistence(
+                        activity.getApplicationContext(),
+                        "Lists")
+                        .insert(cv);
+                // ToDo: refactor to create TaskList and let it show on view
+                activity.addTaskList(String.valueOf(input.getText()));
             }
         });
         builder.setNegativeButton("Cancel",

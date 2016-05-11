@@ -1,7 +1,5 @@
 package com.chmielowski.contexttasklist.view;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,7 +20,7 @@ import com.chmielowski.contexttasklist.view.dialog.AddTaskDialog;
 
 public final class FragmentListView extends Fragment implements ListView {
 
-    private View v;
+    private View view;
 
     @Nullable
     @Override
@@ -31,11 +29,11 @@ public final class FragmentListView extends Fragment implements ListView {
             final ViewGroup container,
             final Bundle savedInstanceState
     ) {
-        v = inflater.inflate(R.layout.task_list, container, false);
-        createTasksTable();
-        createListsTable();
-        Persistence tasksDataBase = new SqlPersistence(v.getContext(), "Tasks");
-        Persistence listsDataBase = new SqlPersistence(v.getContext(), "Lists");
+        view = inflater.inflate(R.layout.task_list, container, false);
+        Persistence tasksDataBase = new SqlPersistence(
+                view.getContext(), "Tasks");
+        Persistence listsDataBase = new SqlPersistence(
+                view.getContext(), "Lists");
         int taskListId = getArguments().getInt("id", 0);
         final TaskList taskList = new SqlTaskList(taskListId,
                 tasksDataBase,
@@ -46,66 +44,16 @@ public final class FragmentListView extends Fragment implements ListView {
             e.printStackTrace();
         }
         final AddTaskDialog dialog = new AddTaskDialog(
-                v.getContext(),
+                view.getContext(),
                 this,
                 taskList);
-        Button addTaskButton = (Button) v.findViewById(R.id.add_task_button);
+        Button addTaskButton = (Button) view.findViewById(R.id.add_task_button);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 dialog.show();
             }
         });
-        return v;
-    }
-
-    private void createTasksTable() {
-        SQLiteOpenHelper sql = new SQLiteOpenHelper(getContext(), "tasks.db", null, 1) {
-            @Override
-            public void onCreate(final SQLiteDatabase db) {
-            }
-
-            @Override
-            public void onUpgrade(final SQLiteDatabase db,
-                                  final int oldVersion,
-                                  final int newVersion) {
-            }
-        };
-        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
-                + "Tasks"
-                + " ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "name TEXT, "
-                + "done INTEGER,"
-                + "list INTEGER"
-                + ");");
-    }
-
-    private void createListsTable() {
-        SQLiteOpenHelper sql = new SQLiteOpenHelper(
-                getContext(), "tasks.db", null, 1) {
-            @Override
-            public void onCreate(final SQLiteDatabase db) {
-            }
-
-            @Override
-            public void onUpgrade(final SQLiteDatabase db,
-                                  final int oldVersion,
-                                  final int newVersion) {
-            }
-        };
-//        sql.getWritableDatabase().execSQL("DROP TABLE Lists;");
-        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
-                + "Lists"
-                + " ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "name TEXT"
-                + ");");
-//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
-//                + " (name) VALUES ('first');");
-//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
-//                + " (name) VALUES ('second');");
-//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
-//                + " (name) VALUES ('third');");
+        return view;
     }
 
     @Override
@@ -119,20 +67,20 @@ public final class FragmentListView extends Fragment implements ListView {
                         description,
                         statusCommand,
                         deleteCommand
-                ).showOn(this.v.getContext(), this, View.generateViewId())
+                ).showOn(this.view.getContext(), this, View.generateViewId())
         );
     }
 
     private LinearLayout taskListLayout() {
-        return (LinearLayout) v.findViewById(R.id.layout_tasks);
+        return (LinearLayout) view.findViewById(R.id.layout_tasks);
     }
 
     @Override
     public void removeTask(final int id) {
         try {
-            taskListLayout().removeView(v.findViewById(id));
+            taskListLayout().removeView(view.findViewById(id));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

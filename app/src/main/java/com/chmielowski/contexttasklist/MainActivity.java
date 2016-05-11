@@ -1,5 +1,7 @@
 package com.chmielowski.contexttasklist;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -30,57 +32,47 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.action_add_list) {
-            final TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
+            final TabLayout tabs = tabLayout();
             new AddListDialog(this, this, tabs).show();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
     }
 
+    private TabLayout tabLayout() {
+        return (TabLayout) findViewById(R.id.tab_layout);
+    }
+
     @Override
-    protected final void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.createTasksTable();
+        this.createListsTable();
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         try {
-            List<Integer> listIndexes = listIndexes();
-            for (int listIdx : listIndexes) {
-                TaskList list = new SqlTaskList(listIdx,
-                        new SqlPersistence(this, "Tasks"),
-                        new SqlPersistence(this, "Lists"));
-                list.showOn((ListsView)this);
-            }
+            this.showLists();
+            this.setListeners();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private List<Integer> listIndexes() throws Exception {
-        return this.listsDataBase.integers("id", "");
+    private void showLists() throws Exception {
+        List<Integer> listIndexes = listIndexes();
+        for (int listIdx : listIndexes) {
+            TaskList list = new SqlTaskList(listIdx,
+                    new SqlPersistence(this, "Tasks"),
+                    new SqlPersistence(this, "Lists"));
+            list.showOn((ListsView) this);
+        }
     }
 
-    private void addTab(final String text) throws Exception {
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(
-                tabLayout
-                        .newTab()
-                        .setText(text));
-        inflateViewPager(tabLayout, listIndexes());
-    }
-
-    @Override
-    public void showList(final String name) throws Exception {
-        this.addTab(name);
-    }
-
-    private void inflateViewPager(TabLayout tabLayout, List<Integer> listIndexes) {
+    private void setListeners() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(new PagerAdapter(
-                getSupportFragmentManager(),
-                listIndexes));
         viewPager.addOnPageChangeListener(
-                new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(
+                new TabLayout.TabLayoutOnPageChangeListener(tabLayout()));
+        tabLayout().setOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(final TabLayout.Tab tab) {
@@ -99,4 +91,76 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
                     }
                 });
     }
+
+    private List<Integer> listIndexes() throws Exception {
+        return this.listsDataBase.integers("id", "");
+    }
+
+    @Override
+    public void addTaskList(final String name) throws Exception {
+        tabLayout().addTab(
+                tabLayout()
+                        .newTab()
+                        .setText(name));
+        this.updateAdapter(tabLayout(), listIndexes());
+    }
+
+    private void updateAdapter(final TabLayout tabLayout,
+                               final List<Integer> listIndexes) {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(new PagerAdapter(
+                getSupportFragmentManager(),
+                listIndexes));
+    }
+
+    private void createTasksTable() {
+        SQLiteOpenHelper sql = new SQLiteOpenHelper(this, "tasks.db", null, 1) {
+            @Override
+            public void onCreate(final SQLiteDatabase db) {
+            }
+
+            @Override
+            public void onUpgrade(final SQLiteDatabase db,
+                                  final int oldVersion,
+                                  final int newVersion) {
+            }
+        };
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
+                + "Tasks"
+                + " ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "name TEXT, "
+                + "done INTEGER,"
+                + "list INTEGER"
+                + ");");
+    }
+
+    private void createListsTable() {
+        SQLiteOpenHelper sql = new SQLiteOpenHelper(
+                this, "tasks.db", null, 1) {
+            @Override
+            public void onCreate(final SQLiteDatabase db) {
+            }
+
+            @Override
+            public void onUpgrade(final SQLiteDatabase db,
+                                  final int oldVersion,
+                                  final int newVersion) {
+            }
+        };
+//        sql.getWritableDatabase().execSQL("DROP TABLE Lists;");
+        sql.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS "
+                + "Lists"
+                + " ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "name TEXT"
+                + ");");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('first');");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('second');");
+//        sql.getWritableDatabase().execSQL("INSERT INTO " + "Lists"
+//                + " (name) VALUES ('third');");
+    }
+
 }

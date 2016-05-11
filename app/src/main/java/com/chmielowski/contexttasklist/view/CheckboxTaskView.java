@@ -16,14 +16,14 @@ public final class CheckboxTaskView implements TaskView {
     private final ChangeStatusCommand statusCommand;
     private final DeleteTaskCommand deleteCommand;
 
-    public CheckboxTaskView(final boolean isDone,
-                            final String description,
-                            final ChangeStatusCommand statusCommand,
-                            final DeleteTaskCommand deleteCommand) {
-        this.isDone = isDone;
-        this.description = description;
-        this.statusCommand = statusCommand;
-        this.deleteCommand = deleteCommand;
+    public CheckboxTaskView(final boolean isDn,
+                            final String descript,
+                            final ChangeStatusCommand statusCmd,
+                            final DeleteTaskCommand deleteCmd) {
+        this.isDone = isDn;
+        this.description = descript;
+        this.statusCommand = statusCmd;
+        this.deleteCommand = deleteCmd;
     }
 
     @NonNull
@@ -44,7 +44,10 @@ public final class CheckboxTaskView implements TaskView {
         task.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
-                new RemoveTaskDialog(context, view, deleteCommand, checkboxViewId).show();
+                new RemoveTaskDialog(context,
+                        view,
+                        deleteCommand,
+                        checkboxViewId).show();
                 return false; // does not matter
             }
         });

@@ -11,7 +11,8 @@ import com.chmielowski.contexttasklist.Persistence;
 import java.util.List;
 import java.util.Vector;
 
-public final class SqlPersistence extends SQLiteOpenHelper implements Persistence {
+public final class SqlPersistence
+        extends SQLiteOpenHelper implements Persistence {
 
     private final String tableName;
     private static final int FIRST_COLUMN = 0;
