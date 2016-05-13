@@ -4,4 +4,5 @@
     <string name="add_task">Add Task</string>
     <string name="add_list">Add list</string>
     <string name="action_add_list">Add list</string>
+    <string name="action_remove_list">Remove list</string>
 </resources>

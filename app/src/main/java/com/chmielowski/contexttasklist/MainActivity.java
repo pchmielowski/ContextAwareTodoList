@@ -32,8 +32,11 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.action_add_list) {
-            final TabLayout tabs = tabLayout();
-            new AddListDialog(this, this, tabs).show();
+            new AddListDialog(this, this, tabLayout()).show();
+            return true;
+        }
+        if (menuItem.getItemId() == R.id.action_remove_list) {
+            this.tabLayout().removeTabAt(this.tabLayout().getSelectedTabPosition());
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
