@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.chmielowski.contexttasklist.commands.Command;
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.ListsView;
@@ -36,10 +37,28 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
             return true;
         }
         if (menuItem.getItemId() == R.id.action_remove_list) {
-            this.tabLayout().removeTabAt(this.tabLayout().getSelectedTabPosition());
+            new RemoveCurrentTabCommand((ListsView)this).execute();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    final class RemoveCurrentTabCommand implements Command {
+        private final ListsView view;
+
+        RemoveCurrentTabCommand(ListsView view) {
+            this.view = view;
+        }
+
+        @Override
+        public void execute() {
+            view.removeCurrentTab();
+        }
+    }
+
+    @Override
+    public void removeCurrentTab() {
+        this.tabLayout().removeTabAt(this.tabLayout().getSelectedTabPosition());
     }
 
     private TabLayout tabLayout() {
