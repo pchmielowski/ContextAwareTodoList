@@ -19,7 +19,7 @@ Dzięki temu z czasem coraz trafniej będzie **odgadywał intencje użytkownika*
 
 ## Postęp prac
 - [x] pojedyncza lista zadań - [ilustracyjny film na YouTube](https://www.youtube.com/watch?v=ewVoxfIU6jg)
-- [ ] większa liczba list - **w toku**
+- [x] większa liczba list - **wydanie w Google Play niedługo!**
 - [ ] kontekstowe wybieranie list
 
 ## Google Play
