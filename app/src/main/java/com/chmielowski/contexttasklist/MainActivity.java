@@ -1,5 +1,6 @@
 package com.chmielowski.contexttasklist;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.chmielowski.contexttasklist.commands.Command;
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
@@ -16,6 +18,7 @@ import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.ListsView;
 import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 import com.chmielowski.contexttasklist.view.PagerAdapter;
+import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 
 import java.util.List;
 
@@ -37,7 +40,15 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
             return true;
         }
         if (menuItem.getItemId() == R.id.action_remove_list) {
-            new RemoveCurrentTabCommand((ListsView)this).execute();
+            try {
+                new RemoveCurrentTabCommand((ListsView) this).execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Context context = getApplicationContext();
+                CharSequence text = "Can not remove list!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast.makeText(context, text, duration).show();
+            }
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
@@ -51,14 +62,20 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
         }
 
         @Override
-        public void execute() {
+        public void execute() throws Exception {
             view.removeCurrentTab();
         }
     }
 
     @Override
-    public void removeCurrentTab() {
-        this.tabLayout().removeTabAt(this.tabLayout().getSelectedTabPosition());
+    public void removeCurrentTab() throws Exception {
+        final int tabNumber = this.tabLayout().getSelectedTabPosition();
+        TaskList list = new SqlTaskList(this.listIndexes().get(tabNumber),
+                new SqlPersistence(this, "Tasks"),
+                new SqlPersistence(this, "Lists"));
+        list.remove();
+        this.tabLayout().removeTabAt(tabNumber);
+        this.updateAdapter(tabLayout(), listIndexes());
     }
 
     private TabLayout tabLayout() {

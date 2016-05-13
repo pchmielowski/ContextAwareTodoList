@@ -1,53 +1,48 @@
 package com.chmielowski.contexttasklist;
 
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class SqlTaskListTest {
-////
-////    @Mock
-////    TaskListView view;
-////
-////    @Mock
-////    Persistence dataBase;
-////
-////    @Test
-////    public void showOn_emptyDataBase_callsGetTasks() {
-////        // arrange
-////        when(dataBase.getTasks()).thenReturn(new Iterable<Task>() {
-////            @Override
-////            public Iterator<Task> iterator() {
-////                return new ArrayList<Task>().iterator();
-////            }
-////        });
-////        SqlTaskList taskList = new SqlTaskList(dataBase);
-////
-////        // act
-////        taskList.showTasksOn(view);
-////
-////        // assert
-////        verify(dataBase).getTasks();
-////    }
-////
-////    @Mock
-////    Task task;
-////
-////    @Test
-////    public void showOn_dataBaseOneTask_callsShowOn() {
-////        // arrange
-////        when(dataBase.getTasks()).thenReturn(new Iterable<Task>() {
-////            @Override
-////            public Iterator<Task> iterator() {
-////                ArrayList<Task> list = new ArrayList<>();
-////                list.add(task);
-////                return list.iterator();
-////            }
-////        });
-////        SqlTaskList taskList = new SqlTaskList(dataBase);
-////
-////        // act
-////        taskList.showTasksOn(view);
-////
-////        // assert
-////        verify(task).showTasksOn(view);
-////    }
-//}
+
+import com.chmielowski.contexttasklist.sql.SqlTaskList;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.verify;
+
+@RunWith(MockitoJUnitRunner.class)
+public class SqlTaskListTest {
+
+    @Mock
+    Persistence tasksDataBase;
+    @Mock
+    Persistence listDataBase;
+
+    @Test
+    public void removes_itself_from_base() throws Exception {
+        // arrange
+        TaskList list = new SqlTaskList(123,
+                tasksDataBase,
+                listDataBase);
+
+        // act
+        list.remove();
+
+        // assert
+        verify(listDataBase).delete("id=123");
+    }
+
+    @Test
+    public void removes_tasks_from_base() throws Exception {
+        // arrange
+        TaskList list = new SqlTaskList(888,
+                tasksDataBase,
+                listDataBase);
+
+        // act
+        list.remove();
+
+        // assert
+        verify(tasksDataBase).delete("list=888");
+    }
+}

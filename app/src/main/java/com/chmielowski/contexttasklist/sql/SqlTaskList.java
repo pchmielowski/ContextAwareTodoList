@@ -44,6 +44,12 @@ public final class SqlTaskList implements TaskList {
         tasksDataBase.insert(cv);
     }
 
+    @Override
+    public void remove() throws Exception {
+        listsDataBase.delete("id=" + this.listId);
+        tasksDataBase.delete("list=" + this.listId);
+    }
+
     private List<Integer> indexes() throws Exception {
         return tasksDataBase.integers("id", "list=" + this.listId);
     }
