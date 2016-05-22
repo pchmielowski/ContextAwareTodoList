@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.chmielowski.contexttasklist.commands.Command;
+import com.chmielowski.contexttasklist.context.Beacon;
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.ListsView;
@@ -81,9 +82,13 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
         return (TabLayout) findViewById(R.id.tab_layout);
     }
 
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final Beacon beacon = new Beacon();
+
         this.createTasksTable();
         this.createListsTable();
         setContentView(R.layout.activity_main);
