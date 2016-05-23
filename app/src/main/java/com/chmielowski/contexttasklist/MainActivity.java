@@ -16,7 +16,6 @@ import com.chmielowski.contexttasklist.commands.Command;
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.ListsView;
-import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 import com.chmielowski.contexttasklist.view.PagerAdapter;
 import com.chmielowski.contexttasklist.view.dialog.AddListDialog;
 
@@ -137,11 +136,11 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
 
     @Override
     public void addTaskList(final String name) throws Exception {
-        tabLayout().addTab(
-                tabLayout()
-                        .newTab()
-                        .setText(name));
-        this.updateAdapter(tabLayout(), listIndexes());
+        final TabLayout tabLayout = tabLayout();
+        final TabLayout.Tab tabWithoutName = tabLayout.newTab();
+        final TabLayout.Tab tabWithName = tabWithoutName.setText(name);
+        tabLayout.addTab(tabWithName);
+        this.updateAdapter(tabLayout, listIndexes());
     }
 
     private void updateAdapter(final TabLayout tabLayout,
