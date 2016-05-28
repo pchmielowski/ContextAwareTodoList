@@ -12,8 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.chmielowski.contexttasklist.commands.Command;
-import com.chmielowski.contexttasklist.context.Beacon;
+import com.chmielowski.contexttasklist.commands.RemoveCurrentTabCommand;
 import com.chmielowski.contexttasklist.sql.SqlPersistence;
 import com.chmielowski.contexttasklist.sql.SqlTaskList;
 import com.chmielowski.contexttasklist.view.ListsView;
@@ -54,19 +53,6 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
         return super.onOptionsItemSelected(menuItem);
     }
 
-    final class RemoveCurrentTabCommand implements Command {
-        private final ListsView view;
-
-        RemoveCurrentTabCommand(ListsView view) {
-            this.view = view;
-        }
-
-        @Override
-        public void execute() throws Exception {
-            view.removeCurrentTab();
-        }
-    }
-
     @Override
     public void removeCurrentTab() throws Exception {
         final int tabNumber = this.tabLayout().getSelectedTabPosition();
@@ -87,7 +73,7 @@ public final class MainActivity extends AppCompatActivity implements ListsView {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Beacon beacon = new Beacon();
+//        final Beacon beacon = new Beacon();
 
         this.createTasksTable();
         this.createListsTable();
