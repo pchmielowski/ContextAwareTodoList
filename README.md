@@ -4,8 +4,12 @@
 
 W repozytorium znajduje się kod aplikacji na Androida pozwalającej na tworzenie i zarządzanie listami zadań do zrobienia. 
 
+:uk: The Android application for managing the lists of task to do.
+
 Aplikacja powstaje w ramach konkursu [Daj się poznać](http://www.maciejaniserowicz.com/daj-sie-poznac/)
 Prace nad nią opisuję na blogu [chmielowski.net](http://www.chmielowski.net).
+
+Użyte technologie: Java, [Kotlin](https://kotlinlang.org/)
 
 Zgodnie z regułami metodyki **Getting Things Done**, zadania do wykonania powinny być skategoryzowane według kontekstu: 
 * w domu
@@ -25,3 +29,5 @@ Dzięki temu z czasem coraz trafniej będzie **odgadywał intencje użytkownika*
 
 ## Google Play
 Aktualnie wstępna wersja znajduje się w sklepie [Google Play](https://play.google.com/apps/testing/com.chmielowski.contexttasklist) dostępna dla alfa testerów.
+
+:uk: Feel free to download the application as is available in [Google Play](https://play.google.com/apps/testing/com.chmielowski.contexttasklist) for alpha testers.
