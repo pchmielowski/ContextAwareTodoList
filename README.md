@@ -22,10 +22,16 @@ Program będzie uczył się więc **w jakich okolicznościach** użytkownik któ
 Dzięki temu z czasem coraz trafniej będzie **odgadywał intencje użytkownika** i zaraz po uruchomieniu pokaże się lista **najlepiej pasująca do aktualnych okoliczności**.
 
 ## Postęp prac
-- [x] pojedyncza lista zadań - [ilustracyjny film na YouTube](https://www.youtube.com/watch?v=ewVoxfIU6jg)
-- [x] większa liczba list - [ilustracyjny film na YouTube](https://www.youtube.com/watch?v=hIRoV4u_72Y)
-- [ ] **kontekstowe wybieranie list (Beacony) - w trakcie pracy**
-- [ ] kontekstowe wybieranie list (inne metody) - w przyszłości
+1. pojedyncza lista zadań :white_check_mark: <br>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=ewVoxfIU6jg
+" target="_blank"><img src="http://img.youtube.com/vi/ewVoxfIU6jg/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" /></a>
+2. większa liczba list :white_check_mark: <br>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hIRoV4u_72Y
+" target="_blank"><img src="http://img.youtube.com/vi/hIRoV4u_72Y/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" /></a>
+3. **kontekstowe wybieranie list (Beacony) - w trakcie pracy**
+4. kontekstowe wybieranie list (inne metody) - w przyszłości
 
 ## Google Play
 Aktualnie wstępna wersja znajduje się w sklepie [Google Play](https://play.google.com/apps/testing/com.chmielowski.contexttasklist) dostępna dla alfa testerów.
